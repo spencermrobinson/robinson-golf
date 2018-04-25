@@ -24,10 +24,10 @@ class Header extends Component {
         
         
         let headerRender = function(user){
-            if( user == null || user =="puppie"){
+            if( user === null || user ==="puppie"){
                 return (
                     <div>
-                    <a href={process.env.REACT_APP_LOGIN}><img src={user_profile} className="header_user_profile"/></a>
+                    <a href={process.env.REACT_APP_LOGIN}><img src={user_profile} alt="" className="header_user_profile"/></a>
                     </div>
                 )
             }else if(  user.admin === true ){
@@ -35,8 +35,8 @@ class Header extends Component {
                     <div>
                     <span className="header_user_name"
                     >{user.firstname}</span>
-                    <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} className="header_user_profile"/></a>
-                    <Link to="/manage"><img src={ inventory } className="header_inventory"/></Link>
+                    <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} alt="" className="header_user_profile"/></a>
+                    <Link to="/manage"><img src={ inventory } alt="" className="header_inventory"/></Link>
                     </div> 
                 )
             }else{
@@ -45,7 +45,7 @@ class Header extends Component {
                     <div>
                     <span className="header_user_name"
                     >{user.firstname}</span>
-                        <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} className="header_user_profile"/></a>
+                        <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} alt="" className="header_user_profile"/></a>
                     </div> 
                 )}
             }
@@ -54,7 +54,7 @@ class Header extends Component {
             <div className="header_container">
                 <div className="header_logo_container">
                     <Link to="/"><span className="robinson_logo"
-                    >Rob{<img src={ robinson_ball } className="robinson_ball"/>}nson Golf</span></Link>
+                    >Rob{<img src={ robinson_ball } className="robinson_ball" alt=""/>}nson Golf</span></Link>
                 </div> 
                 <div className="header_icons">
                     { headerRender(this.props.user) }

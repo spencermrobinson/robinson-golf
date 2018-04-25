@@ -9,11 +9,15 @@ const CHECK_LOGIN = 'CHECK_LOGIN';
 const LOGOUT = 'LOGOUT';
 const GET_ADMINS = 'GET_ADMINS';
 const REMOVE_ADMIN = 'REMOVE_ADMIN';
+const ADD_ADMIN = 'ADD_ADMIN';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
+
+        case ADD_ADMIN + '_FULFILLED':
+        return Object.assign( {}, state, { admins: payload });
 
         case CHECK_LOGIN + '_FULFILLED':
         return Object.assign( {}, state, { user: payload });
@@ -30,6 +34,17 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function newAdmin(firstname, lastname, email){
+    console.log('addAdmin hit reducer')
+    const promise = axios.put(`/api/newAdmin/${firstname}/${lastname}/${email}`).then( response =>
+response.data
+    )
+    return {
+        type: ADD_ADMIN,
+        payload: promise
+    }
+}
 
 export function removeAdmin(id){
     const promise = axios.put(`/api/removeadmin/${id}`).then(response => 

@@ -6,11 +6,6 @@ import { getAdmins, removeAdmin } from '../../ducks/reducer.js';
 import './Admin.css';
 
 class Admin extends Component{
-    constructor(){
-        super();
-
-        
-    }
     componentDidMount(){
         this.props.getAdmins();
     }

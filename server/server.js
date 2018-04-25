@@ -20,6 +20,12 @@ const {
 const app = express();
 app.use(bodyParser.json());
 
+massive(CONNECTION_STRING).then( db => {
+    app.set('db', db);
+    console.log('db connected!')
+    
+}).catch((err) => console.log(err));
+
 
 
 app.use( session({
@@ -85,10 +91,8 @@ passport.use( new Auth0Strategy({
     app.get('/api/check', ctrl.checkLogin)
     app.get('/api/admins', ctrl.getAdmins);
     app.put('/api/removeadmin/:id', ctrl.removeAdmin);
+    app.put('/api/newAdmin/:firstname/:lastname/:email', ctrl.addAdmin);
 
 
-    massive(CONNECTION_STRING).then( db => {
-        app.set('db', db);
-        console.log('db connected!')
-        app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));
-    }).catch((err) => console.log(err));
+    
+    app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));

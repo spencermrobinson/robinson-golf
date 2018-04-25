@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
+import { connect } from 'react-redux';
+import { newAdmin } from '../../ducks/reducer.js';
 import { Link } from 'react-router-dom';
 import './Admin.css';
 
@@ -14,14 +16,15 @@ class Add_Admin extends Component {
         this.inputHandler = this.inputHandler.bind(this);
     }
 
-    inputHandler([prop, val]){
+    inputHandler(prop, val){
         this.setState({
             [prop]: val
         })
     }
 
     render(){
-        console.log('firstname:', this.state.firstname)
+        console.log('state:', this.state.lastname)
+        const { firstname, lastname, email } = this.state;
         return(
             <div>
                 <div>
@@ -37,16 +40,21 @@ class Add_Admin extends Component {
                         <span className="admin_input_titles">Firstname</span>
                         <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('firstname', e.target.value)}/>
                         <span className="admin_input_titles">Lastname</span>
-                        <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('laststname', e.target.value)}/>
+                        <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('lastname', e.target.value)}/>
                         <span className="admin_input_titles_email">Email</span>
                         <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('email', e.target.value)}/>
                     </div>
                     <div className="add_admin_container">
-                    <Link to="/admin"><button type='' className='add_admin_button'>Add Administrator</button></Link>
+                    <Link to="/admin"><button type='' className='add_admin_button' onClick={ () => this.props.newAdmin(firstname, lastname, email)}>Add Administrator</button></Link>
                     </div>  
                 </div>    
             </div> 
         )
     }
 }
-export default Add_Admin;
+function mapStateToProps(state){
+    return{
+
+    }
+}
+export default connect( mapStateToProps ,{ newAdmin })(Add_Admin);

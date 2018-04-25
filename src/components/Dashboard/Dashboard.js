@@ -3,10 +3,7 @@ import Header from '../Header/Header.js';
 
 
 class Dashboard extends Component{
-    constructor(){
-        super();
-
-    }
+    
 
     render(){
         return(

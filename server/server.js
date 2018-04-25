@@ -83,6 +83,8 @@ passport.use( new Auth0Strategy({
     });
 
     app.get('/api/check', ctrl.checkLogin)
+    app.get('/api/admins', ctrl.getAdmins);
+    app.put('/api/removeadmin/:id', ctrl.removeAdmin);
 
 
     massive(CONNECTION_STRING).then( db => {

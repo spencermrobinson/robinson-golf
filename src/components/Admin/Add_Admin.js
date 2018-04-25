@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
+import { Link } from 'react-router-dom';
 import './Admin.css';
 
 class Add_Admin extends Component {
@@ -39,7 +40,10 @@ class Add_Admin extends Component {
                         <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('laststname', e.target.value)}/>
                         <span className="admin_input_titles_email">Email</span>
                         <input type='text' className='add_admin_inputs' onChange={(e)=> this.inputHandler('email', e.target.value)}/>
-                    </div> 
+                    </div>
+                    <div className="add_admin_container">
+                    <Link to="/admin"><button type='' className='add_admin_button'>Add Administrator</button></Link>
+                    </div>  
                 </div>    
             </div> 
         )

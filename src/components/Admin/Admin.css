@@ -1,0 +1,58 @@
+.admin_ribbon{
+    background-color: #27ae60;
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.admin_ribbon_text{
+    color: white;
+    font-size: 20px;
+    font-weight: 100;
+    margin:8px;
+}
+.add_admin_button{
+    background-color: #6fcf97;
+    height: 40px;
+    width: 250px;
+    margin: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 6px;
+    -webkit-box-shadow: -1px 6px 19px -2px rgba(0,0,0,0.76);
+-moz-box-shadow: -1px 6px 19px -2px rgba(0,0,0,0.76);
+box-shadow: -1px 6px 19px -2px rgba(0,0,0,0.76);
+}
+.admin_input_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+}
+.admin_input_titles{
+    margin-top:30px;
+    font-size: 20px;
+    font-weight: 200;
+    position: relative;
+    left: -80px;
+}
+.admin_input_titles_email {
+    margin-top:30px;
+    font-size: 20px;
+    font-weight: 200;
+    position: relative;
+    left: -100px;
+}
+.add_admin_inputs{
+    height: 30px;
+    width: 250px;
+    margin: 2px;
+    -webkit-box-shadow: -3px 7px 21px -1px rgba(53,53,56,1);
+    -moz-box-shadow: -3px 7px 21px -1px rgba(53,53,56,1);
+    box-shadow: -3px 7px 21px -1px rgba(53,53,56,1);
+    font-size: 24px;
+    padding: 2px;
+}

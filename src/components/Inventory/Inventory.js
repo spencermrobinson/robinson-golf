@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 
+class Inventory extends Component {
 
-class Dashboard extends Component{
-    constructor(){
-        super();
 
-    }
+
 
     render(){
         return(
             <div>
                 <div>
                     <Header/>
-                </div> 
-                <h1>dash</h1>
+                </div>
+            <h1>Inventory</h1> 
             </div> 
         )
     }
 }
-export default Dashboard;
+export default Inventory;

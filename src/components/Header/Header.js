@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { checkLogin, logout } from '../../ducks/reducer.js';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import user_profile from './header-assets/user.png';
 import inventory from './header-assets/inventory.png';
 import robinson_ball from './header-assets/golf_robinson_ball.png';
@@ -29,13 +30,13 @@ class Header extends Component {
                     <a href={process.env.REACT_APP_LOGIN}><img src={user_profile} className="header_user_profile"/></a>
                     </div>
                 )
-            }else if(  user.admin === false ){
+            }else if(  user.admin === true ){
                 return(
                     <div>
                     <span className="header_user_name"
                     >{user.firstname}</span>
                     <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} className="header_user_profile"/></a>
-                    <img src={ inventory } className="header_inventory"/>
+                    <Link to="/manage"><img src={ inventory } className="header_inventory"/></Link>
                     </div> 
                 )
             }else{
@@ -52,8 +53,8 @@ class Header extends Component {
         return(
             <div className="header_container">
                 <div className="header_logo_container">
-                    <span className="robinson_logo"
-                    >Rob{<img src={ robinson_ball } className="robinson_ball"/>}nson Golf</span>
+                    <Link to="/"><span className="robinson_logo"
+                    >Rob{<img src={ robinson_ball } className="robinson_ball"/>}nson Golf</span></Link>
                 </div> 
                 <div className="header_icons">
                     { headerRender(this.props.user) }

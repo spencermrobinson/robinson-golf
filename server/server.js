@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
+const ctrl = require('./controller/controller.js');
 
 const {
     SERVER_PORT,
@@ -19,10 +20,7 @@ const {
 const app = express();
 app.use(bodyParser.json());
 
-massive(CONNECTION_STRING).then( db => {
-    app.set('db', db);
-    console.log('db connected!')
-}).catch((err) => console.log(err));
+
 
 app.use( session({
     secret: SESSION_SECRET,
@@ -41,10 +39,10 @@ passport.use( new Auth0Strategy({
     scope: 'openid profile'
 }, function(accessToken, refreshToken, extraParams, profile, done){
     const db = app.get('db')
-    
+    console.log('test:', profile)
    db.users.find_user([profile.id]).then(users => {
        if(!users[0]){
-           db.users.create_user([profile.id, profile.name.givenName, profile.name.familyName]).then(users => {    
+           db.users.create_user([profile.id, profile.name.givenName, profile.name.familyName, false]).then(users => {    
            done(null, users[0].id);  
            })
        }else{
@@ -55,13 +53,21 @@ passport.use( new Auth0Strategy({
 
     passport.serializeUser( function(profile, done){
         done(null, profile)
-        console.log('Profile:', profile)
+        
     });
     passport.deserializeUser( (profile, done) => {
-        db.users/find_session_user([profile]).then( user => {
+        console.log('Profile:', profile)
+        app.get('db').users.find_session_user([profile]).then( user => {
             done(null, user[0]);
         })
     });
+
+    app.get('/auth0', passport.authenticate('auth0'));
+    app.get('/auth/callback', passport.authenticate('auth0', {
+        successRedirect: 'http://localhost:3000/#/',
+        failureRedirect: 'http://localhost:3000/#/auth'
+        
+    }));
 
     app.get('/auth/authenticate', (req, res) => {
         if(req.user){
@@ -73,9 +79,14 @@ passport.use( new Auth0Strategy({
     app.get('/auth/logout', (req, res) => {
         req.logOut();
         res.redirect('http://localhost:3000/#/')
-        console.log('User logout successful')
+        console.log('User logout successful', req.user)
     });
 
+    app.get('/api/check', ctrl.checkLogin)
 
 
-app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));
+    massive(CONNECTION_STRING).then( db => {
+        app.set('db', db);
+        console.log('db connected!')
+        app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));
+    }).catch((err) => console.log(err));

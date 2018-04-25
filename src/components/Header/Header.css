@@ -1,0 +1,43 @@
+.header_container{
+    height: 80px;
+    width: 100%;
+    background-color: #3c826c;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+.robinson_ball {
+    height: 60px;
+    width: 60px;
+    margin: -16px;
+}
+.robinson_logo{
+    color: white;
+    font-size: 24px;
+}
+.header_logo_container{
+    padding: 10px;
+}
+.header_icons{
+    padding: 10px; 
+}
+
+.header_user_profile{
+    height: 60px;
+    width: 60px;
+    
+}
+.header_inventory {
+    height: 60px;
+    width: 60px;
+    
+}
+.header_user_name {
+    color: white;
+    margin: 10px;
+    position: relative;
+    bottom: 18px;
+}

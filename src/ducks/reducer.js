@@ -2,7 +2,10 @@ import axios from 'axios';
 
 const initialState = {
     user: null,
-    admins: null
+    admins: null,
+    products: {
+        product_type: null
+    },
 }
 
 const CHECK_LOGIN = 'CHECK_LOGIN';
@@ -10,11 +13,21 @@ const LOGOUT = 'LOGOUT';
 const GET_ADMINS = 'GET_ADMINS';
 const REMOVE_ADMIN = 'REMOVE_ADMIN';
 const ADD_ADMIN = 'ADD_ADMIN';
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
+
+        case UPDATE_PRODUCT + '_FULFILLED':
+        let newState = Object.assign( {}, state);
+        console.log('newState: ', newState)
+        for( var i in payload ){
+            newState.products[i] = payload[i];
+            console.log('newState: ', newState)
+        }
+        return newState;
 
         case ADD_ADMIN + '_FULFILLED':
         return Object.assign( {}, state, { admins: payload });
@@ -34,6 +47,14 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function updateProduct(obj){
+    // console.log('reducer hit: ', obj)
+    return {
+        type: UPDATE_PRODUCT,
+        payload: obj
+    }
+}
 
 export function newAdmin(firstname, lastname, email){
     console.log('addAdmin hit reducer')

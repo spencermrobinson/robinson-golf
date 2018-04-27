@@ -54,7 +54,7 @@ class Header extends Component {
             <div className="header_container">
                 <div className="header_logo_container">
                     <Link to="/"><span className="robinson_logo"
-                    >Rob{<img src={ robinson_ball } className="robinson_ball" alt=""/>}nson Golf</span></Link>
+                    >R{<img src={ robinson_ball } className="robinson_ball" alt=""/>}G</span></Link>
                 </div> 
                 <div className="header_icons">
                     { headerRender(this.props.user) }

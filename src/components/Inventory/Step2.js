@@ -2,6 +2,7 @@ import React, {Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
 import { updateProduct } from '../../ducks/reducer.js';
+import Drop from '../../utilities/Drop.js';
 
 
 class Step2 extends Component{
@@ -30,6 +31,7 @@ class Step2 extends Component{
                 <div className="admin_ribbon">
                     <span className='admin_ribbon_text'>Manage Inventory</span>
                 </div>
+                
             </div> 
         )
     }

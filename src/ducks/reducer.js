@@ -4,7 +4,20 @@ const initialState = {
     user: null,
     admins: null,
     products: {
-        product_type: null
+        product_type: null,
+        class: null,
+        brand: null,
+        model: null,
+        price: null,
+        quantity: null,
+        loft: null,
+        length: null,
+        flex: null,
+        sale: null,
+        new_price: null,
+        size: null,
+        color: null,
+        gender: null
     },
 }
 

@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard.js';
 import Admin from './components/Admin/Admin.js';
 import Add_Admin from './components/Admin/Add_Admin.js';
 import Inventory from './components/Inventory/Inventory.js';
+import Step2 from './components/Inventory/Step2';
 import Orders from './components/Orders/Orders.js';
 
 export default function Routes(){
@@ -15,6 +16,7 @@ export default function Routes(){
             <Route path='/admin' component={ Admin }/>
             <Route path='/add_admin' component={ Add_Admin }/>
             <Route path='/inventory' component={ Inventory }/>
+            <Route path='/step2' component={ Step2 }/>
             <Route path='/orders' component={ Orders }/>
         </Switch>
     )

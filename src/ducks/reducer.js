@@ -20,7 +20,8 @@ export default ( state = initialState, action) => {
 
     switch( action.type ){
 
-        case UPDATE_PRODUCT + '_FULFILLED':
+        case UPDATE_PRODUCT :
+        console.log('hititit')
         let newState = Object.assign( {}, state);
         console.log('newState: ', newState)
         for( var i in payload ){
@@ -49,7 +50,7 @@ export default ( state = initialState, action) => {
 };
 
 export function updateProduct(obj){
-    // console.log('reducer hit: ', obj)
+    console.log('reducer hit: ', obj)
     return {
         type: UPDATE_PRODUCT,
         payload: obj

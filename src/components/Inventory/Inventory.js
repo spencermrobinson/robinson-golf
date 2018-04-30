@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
 import { updateProduct } from '../../ducks/reducer.js';
+import { Link } from 'react-router-dom';
 import './Inventory.css';
 
 class Inventory extends Component {
@@ -21,9 +22,8 @@ class Inventory extends Component {
 
 
     render(){
-        console.log("state type: ", this.props.product_type)
-        
         const { product_type } = this.state;
+        
         return(
             <div>
                 <div>
@@ -36,16 +36,16 @@ class Inventory extends Component {
                     <span className="select_product_type_text">Select Product Type:  </span>
                     <select className="select_product_type_dd" onChange= { (e) => this.handleChange(e.target.value)}>
                     <option value=''>{this.state.product_type}</option>
-                    <option value='clubs'>Clubs</option>
-                    <option value='balls'>Balls</option>
-                    <option value='gps'>GPS</option>
-                    <option value='shoes'>Shoes</option>
-                    <option value='apparel'>Apparel</option>
-                    <option value='accessories'>Accessories</option>
+                    <option value='Clubs'>Clubs</option>
+                    <option value='Balls'>Balls</option>
+                    <option value='GPS'>GPS</option>
+                    <option value='Shoes'>Shoes</option>
+                    <option value='Apparel'>Apparel</option>
+                    <option value='Accessories'>Accessories</option>
                     </select> 
                 </div>
                 <div>
-                <button type='' className='inventory_next_step_button' onClick={ () => this.props.updateProduct({ product_type :product_type})}>Next Step</button>
+                <Link to='/step2'><button type='' className='inventory_next_step_button' onClick={ () => this.props.updateProduct({product_type })}>Next Step</button></Link>
                 </div>   
             </div> 
         )

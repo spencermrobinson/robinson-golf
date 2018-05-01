@@ -5,7 +5,7 @@ const initialState = {
     admins: null,
     products: {
         product_type: null,
-        class: null,
+        product_class: null,
         brand: null,
         model: null,
         price: null,
@@ -17,7 +17,8 @@ const initialState = {
         new_price: null,
         size: null,
         color: null,
-        gender: null
+        gender: null,
+        image: null
     },
 }
 

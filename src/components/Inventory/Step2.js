@@ -176,6 +176,9 @@ class Step2 extends Component{
                 >Quantity:</span>
                 <input type='text' className='inventory_inputs' placeholder={ this.state.quantity === null ? "Quantity" : this.state.quantity } onChange={ (e) => this.updateHandler('quantity', e.target.value)}/>
                 <span className="add_inventory_text"
+                >Price:</span>
+                <input type='text' className='inventory_inputs' placeholder={ this.state.price === null ? "Price" : this.state.price } onChange={ (e) => this.updateHandler('price', e.target.value)}/>
+                <span className="add_inventory_text"
                 >Sale:</span>
                 <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('sale', e.target.value)}>
                 <option value={false}>No</option>
@@ -202,6 +205,9 @@ class Step2 extends Component{
             <span className="add_inventory_text"
                 >Quantity:</span>
                 <input type='text' className='inventory_inputs' placeholder={ this.state.quantity === null ? "Quantity" : this.state.quantity } onChange={ (e) => this.updateHandler('quantity', e.target.value)}/>
+                <span className="add_inventory_text"
+                >Price:</span>
+                <input type='text' className='inventory_inputs' placeholder={ this.state.price === null ? "Price" : this.state.price } onChange={ (e) => this.updateHandler('price', e.target.value)}/>
                 <span className="add_inventory_text"
                 >Sale:</span>
                 <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('sale', e.target.value)}>
@@ -243,7 +249,9 @@ class Step2 extends Component{
                 <option key={ shoe.value} value={shoe.value}>{shoe.label}</option>
             )) }
             </select>
-            
+            <span className="add_inventory_text"
+            >Price:</span>
+            <input type='text' className='inventory_inputs' placeholder={ this.state.price === null ? "Price" : this.state.price } onChange={ (e) => this.updateHandler('price', e.target.value)}/>
                 
                 <span className="add_inventory_text"
                 >Sale:</span>
@@ -303,6 +311,9 @@ class Step2 extends Component{
                 <span className="add_inventory_text">Quantity:</span>
                 <input type='text' className='inventory_inputs' placeholder={ this.state.quantity === null ? "Quantity" : this.state.quantity } onChange={ (e) => this.updateHandler('quantity', e.target.value)}/>
                 <span className="add_inventory_text"
+                >Price:</span>
+                <input type='text' className='inventory_inputs' placeholder={ this.state.price === null ? "Price" : this.state.price } onChange={ (e) => this.updateHandler('price', e.target.value)}/>
+                <span className="add_inventory_text"
                 >Sale:</span>
                 <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('sale', e.target.value)}>
                 <option value={false}>No</option>
@@ -331,6 +342,9 @@ class Step2 extends Component{
                 >Quantity:</span>
                 <input type='text' className='inventory_inputs' placeholder={ this.state.quantity === null ? "Quantity" : this.state.quantity } onChange={ (e) => this.updateHandler('quantity', e.target.value)}/>
                 <span className="add_inventory_text"
+                >Price:</span>
+                <input type='text' className='inventory_inputs' placeholder={ this.state.price === null ? "Price" : this.state.price } onChange={ (e) => this.updateHandler('price', e.target.value)}/>
+                <span className="add_inventory_text"
                 >Sale:</span>
                 <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('sale', e.target.value)}>
                 <option value={false}>No</option>
@@ -346,7 +360,7 @@ class Step2 extends Component{
     }
 
     render(){
-        console.log('state', this.state);
+        
         const { product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender } = this.state;
         return(
             <div>
@@ -362,7 +376,7 @@ class Step2 extends Component{
                 <div>
                     <Link to="/inventory"><button type='' className='inventory_next_step_button2' onClick={ () => this.props.updateProduct({product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender })}>Back</button></Link>
                     
-                    <button type='' className='inventory_next_step_button2' onClick={ () => this.props.updateProduct({product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender })}>Next</button>
+                    <Link to="/step3"><button type='' className='inventory_next_step_button2' onClick={ () => this.props.updateProduct({product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender })}>Next</button></Link>
                 </div> 
             </div> 
         )
@@ -371,7 +385,7 @@ class Step2 extends Component{
 function mapStateToProps(state){
     return {
         product_type: state.products.product_type,
-        product_class: state.products.class,
+        product_class: state.products.product_class,
         brand: state.products.brand,
         model: state.products.model,
         price: state.products.price,

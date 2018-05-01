@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS products(
+id SERIAL PRIMARY KEY,
+product_type VARCHAR(20),
+product_class VARCHAR(20),
+brand VARCHAR(20),
+model VARCHAR(40),
+picture TEXT,
+flex VARCHAR(20),
+length VARCHAR(20),
+loft VARCHAR(20),
+gender VARCHAR(20),
+color VARCHAR(20),
+size VARCHAR(20),
+price DECIMAL(6,2),
+quantity INTEGER,
+sale BOOLEAN,
+new_price DECIMAL(6,2));

@@ -13,7 +13,7 @@ const initialState = {
         loft: null,
         length: null,
         flex: null,
-        sale: null,
+        sale: false,
         new_price: null,
         size: null,
         color: null,

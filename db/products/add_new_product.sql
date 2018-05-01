@@ -1,0 +1,2 @@
+INSERT INTO products(product_type, product_class, brand, model, picture, flex, length, loft, gender, color, size, price, quantity, sale, new_price)
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);

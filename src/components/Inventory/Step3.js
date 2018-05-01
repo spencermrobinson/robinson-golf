@@ -3,6 +3,7 @@ import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
 import { updateProduct } from '../../ducks/reducer.js';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import "./Inventory.css";
 
 class Step3 extends Component{
@@ -26,17 +27,43 @@ class Step3 extends Component{
             image: this.props.image || null
         }
         this.imageHandler = this.imageHandler.bind(this);
+        this.addInventory = this.addInventory.bind(this);
+        
+    }
+
+    addInventory(){
+        console.log('hit')
+        let { product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender, image } = this.state;
+        this.props.updateProduct({ image });
+        axios.post(`/api/add_inventory`, {
+            product_type, 
+            product_class, 
+            brand, 
+            model, 
+            price, 
+            quantity, 
+            loft, 
+            length, 
+            flex, 
+            sale, 
+            new_price, 
+            size, 
+            color, 
+            gender, 
+            image
+        }).then( () => {this.props.history.push('/manage')});
     }
 
     imageHandler(prop, val){
+        let { image } = this.state;
         this.setState({
             [prop]: val
         })
     }
 
     render(){
-        console.log('state', this.state)
-        const { product_type, product_class, brand, model, price, quantity, loft, length, flex, sale, new_price, size, color, gender, image } = this.state;
+        console.log('state3', this.state)
+        const {  image } = this.state;
         return(
         <div>
             <div>
@@ -54,9 +81,9 @@ class Step3 extends Component{
             </div> 
          
             <div>
-                <Link to="/inventory"><button type='' className='inventory_next_step_button2'>Back</button></Link>
+                <Link to="/step2"><button type='' className='inventory_next_step_button2' onClick={ () => this.props.updateProduct({ image })}>Back</button></Link>
             
-                <Link to="/step3"><button type='' className='inventory_next_step_button2'>Add</button></Link>
+                <button type='button' className='' onClick={ () => this.addInventory()}>add</button>
             </div>
         </div> 
         )
@@ -73,7 +100,7 @@ function mapStateToProps(state){
         loft: state.products.loft,
         length: state.products.length,
         flex: state.products.flex,
-        sale: state.products. sale,
+        sale: state.products.sale,
         new_price: state.products.new_price,
         size: state.products.size,
         color: state.products.color,

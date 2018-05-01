@@ -28,9 +28,18 @@ module.exports = {
 
     addAdmin: (req, res) => {
         const db = req.app.get('db');
-        console.log('test:', req.params)
         db.users.add_admin([req.params.firstname, req.params.lastname, req.params.email]).then(response => {
             console.log('addAdmin:', response)
+            res.status(200).send(response)
+        }).catch( (err) => res.status(500).send(console.log(err)));
+    },
+
+    addInventory: (req, res ) => {
+        const db = req.app.get('db');
+        console.log('product req.body', req.body)
+        const { product_type, product_class, brand, model, image, flex, length, loft, gender, color, size, price, quantity, sale, new_price} = req.body;
+        db.products.add_new_product([product_type, product_class, brand, model, image, flex, length, loft, gender, color, size, price, quantity, sale, new_price]).then(response => {
+            console.log('product created', response)
             res.status(200).send(response)
         }).catch( (err) => res.status(500).send(console.log(err)));
     }

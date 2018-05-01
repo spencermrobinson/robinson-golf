@@ -29,10 +29,13 @@ const REMOVE_ADMIN = 'REMOVE_ADMIN';
 const ADD_ADMIN = 'ADD_ADMIN';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
+
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
+
+        
 
         case UPDATE_PRODUCT :
         console.log('hititit')

@@ -92,6 +92,7 @@ passport.use( new Auth0Strategy({
     app.get('/api/admins', ctrl.getAdmins);
     app.put('/api/removeadmin/:id', ctrl.removeAdmin);
     app.put('/api/newAdmin/:firstname/:lastname/:email', ctrl.addAdmin);
+    app.post('/api/add_inventory', ctrl.addInventory);
 
 
     

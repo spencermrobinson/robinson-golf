@@ -1,7 +1,7 @@
 const flex = [{label: "Women", value: "Women"},{label: "Senior", value: "Senior"},{label: "Reg", value: "Reg"},{label: "Stiff", value: "Stiff"},{label: "X-Stiff", value: "X-Stiff"}];
 const length = [{label:'-2"', value:'-2"'},{label:'-1.5"', value:'-1.5"'},{label:'-1"', value:'-1"'},{label:'-.05"', value:'-.05"'},{label:"std", value:"0"},{label:'+.05"', value:'+.05"'},{label:'+1"', value:'+1"'},{label:'+1.5"', value:'+1.5"'},{label:'+2"', value:'+2"'}];
 const loft = [{label: "8.5º", value:"8.5º"},{label: "9.5º", value:"9.5º"},{label: "10.5º", value:"10.5º"},{label: "13º", value:"13º"}];
-const hybrid_loft = [{label: "15º", value:"15º"},{label: "18º", value:"18º"},{label: "20º", value:"20º"},{label: "23º", value:"23º"}];
+const hybrid_loft = [{label: "13º", value:"13º"},{label: "15º", value:"15º"},{label: "18º", value:"18º"},{label: "20º", value:"20º"},{label: "23º", value:"23º"}];
 const wedge_loft = [{label: "48º", value:"48º"},{label: "50º", value:"50º"},{label: "52º", value:"52º"},{label: "54º", value:"54º"},{label: "56º", value:"56º"},{label: "58º", value:"58º"},{label: "60º", value:"60º"},{label: "62º", value:"62º"},{label: "64º", value:"64º"}];
 
 const color = [{label: "white", value:"white"},{label: "black", value:"black"},{label: "gray", value:"gray"},{label: "red", value:"red"},{label: "blue", value:"blue"},{label: "green", value:"green"},{label: "yellow", value:"yellow"},{label: "orange", value:"orange"},{label: "brown", value:"brown"}];

@@ -17,7 +17,7 @@ class Step2 extends Component{
         model: this.props.model || null,
         price: this.props.price || null,
         quantity: this.props.quantity || null,
-        loft: this.props.loft || null,
+        loft: this.props.loft || "--Select--",
         length: this.props.length || null,
         flex: this.props.flex || null,
         sale: this.props.sale || false,
@@ -51,10 +51,15 @@ class Step2 extends Component{
         const shoe = Drop.shoe;
         const brand = Drop.brand;
         const club_class = Drop.club_class;
-        const loft = Drop.loft;
+        const driver_loft = Drop.loft;
         const hybrid_loft = Drop.hybrid_loft;
-        const wedge_loft = Drop.wedge_loft;
+        const wedges_loft = Drop.wedge_loft;
+        let loft_class = this.state.class;
+        const loft = this.state.loft;
+
         
+        
+    
         
 
         if( product_type == 'Clubs'){
@@ -79,9 +84,43 @@ class Step2 extends Component{
                 <span className="add_inventory_text"
                 >Model:</span>
                 <input type='text' className='inventory_model_input' placeholder={ this.state.model === null ? "Model" : this.state.model } onChange={ (e) => this.updateHandler('model', e.target.value)}/>
+                { loft_class === "Driver"  ? <div className="loft_display_container"><span className="add_inventory_text"
+                    >Loft:</span>
+                    <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('loft', e.target.value)}>
+                    <option value={null}>{ loft === "--Select--" ? "--Select--" : loft }</option>
+                    { driver_loft.map( driver_loft =>(
+                    <option key={ driver_loft.value} value={driver_loft.value}>{driver_loft.label}</option>
+                    )) }
+                    </select></div>
+                : loft_class === "Fairway" ? 
+                    <div className="loft_display_container"><span className="add_inventory_text"
+                    >Loft:</span>
+                    <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('loft', e.target.value)}>
+                    <option value={null}>{ loft === "--Select--" ? "--Select--" : loft }</option>
+                    { hybrid_loft.map( hybrid_loft =>(
+                        <option key={ hybrid_loft.value} value={hybrid_loft.value}>{hybrid_loft.label}</option>
+                    )) }
+                    </select></div>
+                : loft_class === "Hybrid" ? 
+                    <div className="loft_display_container"><span className="add_inventory_text"
+                    >Loft:</span>
+                    <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('loft', e.target.value)}>
+                    <option value={null}>{ loft === "--Select--" ? "--Select--" : loft }</option>
+                    { hybrid_loft.map( hybrid_loft =>(
+                    <option key={ hybrid_loft.value} value={hybrid_loft.value}>{hybrid_loft.label}</option>
+                    )) }
+                    </select></div> 
+                : loft_class === "Wedges" ?
+                    <div className="loft_display_container"><span className="add_inventory_text"
+                    >Loft:</span>
+                    <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('loft', e.target.value)}>
+                    <option value={null}>{ loft === "--Select--" ? "--Select--" : loft }</option>
+                    { wedges_loft.map( wedges_loft =>(
+                    <option key={ wedges_loft.value} value={wedges_loft.value}>{wedges_loft.label}</option>
+                    )) }
+                    </select></div> : <div></div>  }
                 
                 
-
 
 
                 <span className="add_inventory_text"

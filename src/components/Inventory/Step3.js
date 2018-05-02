@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
-import { updateProduct } from '../../ducks/reducer.js';
+import { updateProduct, resetProducts } from '../../ducks/reducer.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "./Inventory.css";
@@ -51,7 +51,10 @@ class Step3 extends Component{
             color, 
             gender, 
             image
-        }).then( () => {this.props.history.push('/manage')});
+        }).then( () => {
+            this.props.resetProducts();
+            this.props.history.push('/manage');
+        });
     }
 
     imageHandler(prop, val){
@@ -83,7 +86,7 @@ class Step3 extends Component{
             <div>
                 <Link to="/step2"><button type='' className='inventory_next_step_button2' onClick={ () => this.props.updateProduct({ image })}>Back</button></Link>
             
-                <button type='button' className='' onClick={ () => this.addInventory()}>add</button>
+                <button type='button' className='inventory_next_step_button2' onClick={ () => this.addInventory()}>add</button>
             </div>
         </div> 
         )
@@ -108,4 +111,4 @@ function mapStateToProps(state){
         image: state.products.image
     }
 }
-export default connect( mapStateToProps , { updateProduct })(Step3);
+export default connect( mapStateToProps , { updateProduct, resetProducts })(Step3);

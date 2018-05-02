@@ -28,14 +28,21 @@ const GET_ADMINS = 'GET_ADMINS';
 const REMOVE_ADMIN = 'REMOVE_ADMIN';
 const ADD_ADMIN = 'ADD_ADMIN';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-
+const RESET_PRODUCTS = 'RESET_PRODUCTS';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
 
-        
+        case RESET_PRODUCTS: {
+            let newState = Object.assign({}, state);
+            for( var j in newState.products ) {
+              newState.products[j] = null;
+            }
+            return newState
+            
+          }
 
         case UPDATE_PRODUCT :
         console.log('hititit')
@@ -65,6 +72,13 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function resetProducts() {
+    return {
+      type: RESET_PRODUCTS,
+      payload: null
+    }
+  }
 
 export function updateProduct(obj){
     console.log('reducer hit: ', obj)

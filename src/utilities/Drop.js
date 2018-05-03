@@ -1,5 +1,5 @@
 const flex = [{label: "Women", value: "Women"},{label: "Senior", value: "Senior"},{label: "Reg", value: "Reg"},{label: "Stiff", value: "Stiff"},{label: "X-Stiff", value: "X-Stiff"}];
-const length = [{label:'-2"', value:'-2"'},{label:'-1.5"', value:'-1.5"'},{label:'-1"', value:'-1"'},{label:'-.05"', value:'-.05"'},{label:"std", value:"0"},{label:'+.05"', value:'+.05"'},{label:'+1"', value:'+1"'},{label:'+1.5"', value:'+1.5"'},{label:'+2"', value:'+2"'}];
+const length = [{label:'-2"', value:'-2"'},{label:'-1.5"', value:'-1.5"'},{label:'-1"', value:'-1"'},{label:'-.05"', value:'-.05"'},{label:"std", value:"std"},{label:'+.05"', value:'+.05"'},{label:'+1"', value:'+1"'},{label:'+1.5"', value:'+1.5"'},{label:'+2"', value:'+2"'}];
 const loft = [{label: "8.5º", value:"8.5º"},{label: "9.5º", value:"9.5º"},{label: "10.5º", value:"10.5º"},{label: "13º", value:"13º"}];
 const hybrid_loft = [{label: "13º", value:"13º"},{label: "15º", value:"15º"},{label: "18º", value:"18º"},{label: "20º", value:"20º"},{label: "23º", value:"23º"}];
 const wedge_loft = [{label: "48º", value:"48º"},{label: "50º", value:"50º"},{label: "52º", value:"52º"},{label: "54º", value:"54º"},{label: "56º", value:"56º"},{label: "58º", value:"58º"},{label: "60º", value:"60º"},{label: "62º", value:"62º"},{label: "64º", value:"64º"}];
@@ -11,6 +11,7 @@ const shoe = [{label: "5", value:"5"},{label: "5.5", value:"5.5"},{label: "6", v
 const apparel_class = [{label: "Shirt", value: "Shirt"},{label: "Sweater", value: "Sweater"},{label: "Pants", value: "Pants"},{label: "Shorts", value: "Shorts"},{label: "Socks", value: "Socks"},{label: "Hat", value: "Hat"},{label: "Other", value: "Other"}];
 
 const brand = [{label: "Taylormade", value:"Taylormade"},{label: "Titleist", value:"Titleist"},{label: "Scotty-Cameron", value:"Scotty-Cameron"},{label: "Cobra", value:"Cobra"},{label: "Mizuno", value:"Mizuno"},{label: "Cleveland", value:"Cleveland"},{label: "UnderArmour", value:"UnderArmour"},{label: "Puma", value:"Puma"},{label: "Adidas", value:"Adidas"},{label: "FootJoy", value:"FootJoy"},{label: "Nike", value:"Nike"},{label: "Garmin", value:"Garmin"},{label: "Bushnell", value:"Bushnell"},{label: "Leopold", value:"Leopold"},{label: "Other", value:"Other"}];
+const clothe_brand = [{label: "UnderArmour", value:"UnderArmour"},{label: "Puma", value:"Puma"},{label: "Adidas", value:"Adidas"},{label: "FootJoy", value:"FootJoy"},{label: "Nike", value:"Nike"}]
 const club_brand =[{label: "Taylormade", value:"Taylormade"},{label: "Titleist", value:"Titleist"},{label: "Scotty-Cameron", value:"Scotty-Cameron"},{label: "Cobra", value:"Cobra"},{label: "Mizuno", value:"Mizuno"},{label: "Cleveland", value:"Cleveland"},{label: "Callaway", value:"Callaway"},{label: "Ping", value:"Ping"}, ];
 const club_class = [{label:"Driver", value: "Driver"},{label:"Fairway", value: "Fairway"},{label:"Hybrid", value: "Hybrid"},{label:"Irons", value: "Irons"},{label:"Wedges", value: "Wedges"},{label:"Putter", value: "Putter"}]
 export default {
@@ -26,5 +27,6 @@ export default {
     hybrid_loft,
     wedge_loft,
     apparel_class,
-    club_brand
+    club_brand, 
+    clothe_brand
 };

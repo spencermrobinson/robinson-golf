@@ -93,7 +93,8 @@ passport.use( new Auth0Strategy({
     app.put('/api/removeadmin/:id', ctrl.removeAdmin);
     app.put('/api/newAdmin/:firstname/:lastname/:email', ctrl.addAdmin);
     app.post('/api/add_inventory', ctrl.addInventory);
-
-
+    app.get('/api/searchBrand/:brand', ctrl.searchBrand);
+    app.get('/api/product_type/:product_type', ctrl.getByProduct_Type);
+    app.get('/api/product_class/:product_class', ctrl.getByProduct_Class);
     
     app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));

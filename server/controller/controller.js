@@ -42,5 +42,30 @@ module.exports = {
             console.log('product created', response)
             res.status(200).send(response)
         }).catch( (err) => res.status(500).send(console.log(err)));
-    }
+    }, 
+     
+    searchBrand: (req, res ) => {
+        const db = req.app.get('db');
+        console.log('search brand:', req.params)
+        db.products.search_brand([req.params.brand]).then( response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
+
+    getByProduct_Type: (req, res ) => {
+        const db = req.app.get('db');
+        db.products.getAll_product_type([req.params.product_type]).then( response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+
+    },
+    
+    getByProduct_Class: (req, res ) => {
+        const db = req.app.get('db');
+        console.log('searchClass:', req.params)
+        db.products.getProductClass([req.params.product_class]).then( response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+
+    },
 }

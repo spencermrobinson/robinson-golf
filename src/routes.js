@@ -21,7 +21,7 @@ export default function Routes(){
             <Route exact path='/step2' component={ Step2 }/>
             <Route path='/step3' component={ Step3 } />
             <Route path='/orders' component={ Orders }/>
-            <Route exact path='/products/:destination' component={ Products}/>
+            <Route path='/products/:destination' component={ Products}/>
         </Switch>
     )
 }

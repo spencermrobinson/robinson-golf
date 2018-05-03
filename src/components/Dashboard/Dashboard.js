@@ -38,17 +38,17 @@ class Dashboard extends Component{
                     <Header/>
                 </div> 
                 <div className="drop_down_container">
-                    <img src={greenclubs} alt="" className="greenclubs" onMouseEnter={ () => this.dropDown()} onMouseLeave={ () => this.dropDown()}/>
+                    <img src={greenclubs} alt="" className="greenclubs" onClick={ () => this.dropDown()}/>
                     { this.state.dropdown === true ? 
                         <div className="drop_down_buttons">
-                            <Link to={`/products/${'Brand'}`} className='dash_menu'><button type='button'>Brand</button></Link>
-                            <button type='button' className='dash_menu' >Clubs</button>
-                            <button type='button' className='dash_menu' >Balls</button>
-                            <button type='button' className='dash_menu' >GPS</button>
-                            <button type='button' className='dash_menu' >Shoes</button>
-                            <button type='button' className='dash_menu' >Apparel</button>
-                            <button type='button' className='dash_menu' >Accessories</button>
-                            <button type='button' className='dash_menu' >Sale</button>
+                            <Link to='/products/Brand' className='dash_menu' ><div>Brand</div></Link>
+                            <Link to='/products/Clubs' className='dash_menu' ><div>Clubs</div></Link>
+                            <Link to='/products/Balls' className='dash_menu' ><div>Balls</div></Link>
+                            <Link to='/products/GPS' className='dash_menu' ><div>GPS</div></Link>
+                            <Link to='/products/Shoes' className='dash_menu' ><div>Shoes</div></Link>
+                            <Link to='/products/Apparel' className='dash_menu' ><div>Apparel</div></Link>
+                            <Link to='/products/Accessories' className='dash_menu' ><div>Accessories</div></Link>
+                            <Link to='/products/Sale' className='dash_menu' ><div>Sale</div></Link>
                         </div> : <div></div> }
                 </div> 
             </div> 

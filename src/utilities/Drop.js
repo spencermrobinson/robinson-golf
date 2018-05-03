@@ -11,6 +11,7 @@ const shoe = [{label: "5", value:"5"},{label: "5.5", value:"5.5"},{label: "6", v
 const apparel_class = [{label: "Shirt", value: "Shirt"},{label: "Sweater", value: "Sweater"},{label: "Pants", value: "Pants"},{label: "Shorts", value: "Shorts"},{label: "Socks", value: "Socks"},{label: "Hat", value: "Hat"},{label: "Other", value: "Other"}];
 
 const brand = [{label: "Taylormade", value:"Taylormade"},{label: "Titleist", value:"Titleist"},{label: "Scotty-Cameron", value:"Scotty-Cameron"},{label: "Cobra", value:"Cobra"},{label: "Mizuno", value:"Mizuno"},{label: "Cleveland", value:"Cleveland"},{label: "UnderArmour", value:"UnderArmour"},{label: "Puma", value:"Puma"},{label: "Adidas", value:"Adidas"},{label: "FootJoy", value:"FootJoy"},{label: "Nike", value:"Nike"},{label: "Garmin", value:"Garmin"},{label: "Bushnell", value:"Bushnell"},{label: "Leopold", value:"Leopold"},{label: "Other", value:"Other"}];
+const club_brand =[{label: "Taylormade", value:"Taylormade"},{label: "Titleist", value:"Titleist"},{label: "Scotty-Cameron", value:"Scotty-Cameron"},{label: "Cobra", value:"Cobra"},{label: "Mizuno", value:"Mizuno"},{label: "Cleveland", value:"Cleveland"},{label: "Callaway", value:"Callaway"},{label: "Ping", value:"Ping"}, ];
 const club_class = [{label:"Driver", value: "Driver"},{label:"Fairway", value: "Fairway"},{label:"Hybrid", value: "Hybrid"},{label:"Irons", value: "Irons"},{label:"Wedges", value: "Wedges"},{label:"Putter", value: "Putter"}]
 export default {
     flex, 
@@ -24,5 +25,6 @@ export default {
     club_class,
     hybrid_loft,
     wedge_loft,
-    apparel_class
+    apparel_class,
+    club_brand
 };

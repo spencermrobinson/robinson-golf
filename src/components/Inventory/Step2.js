@@ -63,7 +63,7 @@ class Step2 extends Component{
     
         
 
-        if( product_type == 'Clubs'){
+        if( product_type === 'Clubs'){
             return(
                 <div className="inventory_input_container">
                 <span className="add_inventory_text"
@@ -393,7 +393,7 @@ function mapStateToProps(state){
         loft: state.products.loft,
         length: state.products.length,
         flex: state.products.flex,
-        sale: state.products. sale,
+        sale: state.products.sale,
         new_price: state.products.new_price,
         size: state.products.size,
         color: state.products.color,

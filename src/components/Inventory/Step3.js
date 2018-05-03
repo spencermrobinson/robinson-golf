@@ -58,7 +58,6 @@ class Step3 extends Component{
     }
 
     imageHandler(prop, val){
-        let { image } = this.state;
         this.setState({
             [prop]: val
         })

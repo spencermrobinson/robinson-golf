@@ -1,0 +1,26 @@
+.drop_down_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.greenclubs {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px;
+}
+.drop_down_buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+.dash_menu{
+    height: 20px;
+    width: 30%;
+    background-color:#27AE60;
+    color: white;
+}

@@ -8,6 +8,7 @@ import Inventory from './components/Inventory/Inventory.js';
 import Step2 from './components/Inventory/Step2';
 import Step3 from './components/Inventory/Step3';
 import Orders from './components/Orders/Orders.js';
+import Products from './components/Products/Products.js';
 
 export default function Routes(){
     return(
@@ -20,6 +21,7 @@ export default function Routes(){
             <Route exact path='/step2' component={ Step2 }/>
             <Route path='/step3' component={ Step3 } />
             <Route path='/orders' component={ Orders }/>
+            <Route exact path='/products/:destination' component={ Products}/>
         </Switch>
     )
 }

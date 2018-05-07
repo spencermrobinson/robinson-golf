@@ -3,6 +3,7 @@ import axios from 'axios';
 const initialState = {
     user: null,
     admins: null,
+    cart: [],
     products: {
         product_type: null,
         product_class: null,
@@ -29,6 +30,7 @@ const REMOVE_ADMIN = 'REMOVE_ADMIN';
 const ADD_ADMIN = 'ADD_ADMIN';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 const RESET_PRODUCTS = 'RESET_PRODUCTS';
+const GET_CART = 'GET_CART';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
@@ -69,9 +71,22 @@ export default ( state = initialState, action) => {
         case REMOVE_ADMIN + '_FULFILLED':
         return Object.assign( {}, state, { admins: payload });
 
+        case GET_CART + '_FULFILLED': 
+        return Object.assign( {}, state, {cart: payload});
+
         default: return state; 
     }
 };
+
+export function getCart(){
+    const promise = axios.get('/api/getCart').then(response => 
+    response.data
+    )
+    return{
+        type: GET_CART,
+        payload: promise
+    }
+}
 
 export function resetProducts() {
     return {

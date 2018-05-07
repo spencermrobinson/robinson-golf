@@ -55,7 +55,6 @@ class Products extends Component{
     }
     apparelBrandSearch(){
         const brand = this.state.brand;
-        const displayProducts = this.state.displayProducts;
         axios.get(`/api/apparelBrandSearch/${brand}`).then(response => {
             this.setState({
                 displayProducts: response.data
@@ -64,7 +63,6 @@ class Products extends Component{
     }
     searchBrand(){
         const brand = this.state.brand;
-        const displayProducts = this.state.displayProducts;
         axios.get(`/api/searchBrand/${brand}`).then(response =>{
             console.log(response.data);
         this.setState({
@@ -97,18 +95,9 @@ class Products extends Component{
     }
 
     selectionOptions(){
-        const club_brand = Drop.club_brand;
-        const flex = Drop.flex;
-        const length = Drop.length;
-        const color = Drop.color;
-        const gender = Drop.gender;
-        const apparel_size = Drop.apparel_size;
-        const shoe = Drop.shoe;
+        
         const brand = Drop.brand;
         const club_class = Drop.club_class;
-        const driver_loft = Drop.loft;
-        const hybrid_loft = Drop.hybrid_loft;
-        const wedges_loft = Drop.wedge_loft;
         const apparel_class = Drop.apparel_class;
         const clothe_brand = Drop.clothe_brand;
 

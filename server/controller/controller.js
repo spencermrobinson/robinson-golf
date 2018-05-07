@@ -83,5 +83,19 @@ module.exports = {
             console.log('specific product', response)
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
+    },
+    addToCart: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.addToCart([req.user.id, req.params.product_id, req.params.quantity]).then( response => {
+            console.log('added to cart:', response)
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    }, 
+    getCart: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.getCart([1]).then(response => {
+            console.log('fetched cart:', response)
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
     }
 }

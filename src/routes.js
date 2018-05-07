@@ -10,6 +10,7 @@ import Step3 from './components/Inventory/Step3';
 import Orders from './components/Orders/Orders.js';
 import Products from './components/Products/Products.js';
 import Product from './components/Product/Product.js';
+import Cart from './components/Cart/Cart.js';
 
 export default function Routes(){
     return(
@@ -24,6 +25,7 @@ export default function Routes(){
             <Route path='/orders' component={ Orders }/>
             <Route path='/products/:destination' component={ Products}/>
             <Route path='/product/:id' component={ Product } />
+            <Route path='/cart/:id' component={ Cart }/>
             
         </Switch>
     )

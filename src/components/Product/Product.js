@@ -13,6 +13,7 @@ class Product extends Component {
             quantity: 1,
         }
         this.quantityHandler = this.quantityHandler.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     }
     componentDidMount(){
         const product = this.props.match.params.id;
@@ -29,9 +30,15 @@ class Product extends Component {
             [prop]: val
         })
     }
+    addToCart(){
+        const { product , quantity} = this.state;
+        axios.post(`/api/addToCart/${product[0].id}/${quantity}`).then( () => {
+            this.props.history.push(`/cart/${this.props.user.id}`)
+        })
+    }
 
     render(){
-        const product = this.state.product;
+        
         
         return(
             <div>
@@ -64,7 +71,7 @@ class Product extends Component {
                             </div> : 
                             <div className="add_cart_container">
                             <input type="number" className='quantity' min="1" max="20" placeholder={this.state.quantity} onChange={(e) => this.quantityHandler('quantity', e.target.value)}/>
-                            <button type='' className='add_cart_button'>Add To Cart</button>
+                            <button type='' className='add_cart_button' onClick={() => this.addToCart()}>Add To Cart</button>
                             </div>}
                             </div>
                               

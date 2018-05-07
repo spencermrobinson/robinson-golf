@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from "../Header/Header.js";
 import axios from 'axios';
+import { connect } from 'react-redux';
 import './Product.css';
 
 
@@ -31,6 +32,7 @@ class Product extends Component {
 
     render(){
         const product = this.state.product;
+        
         return(
             <div>
                 <div>
@@ -55,11 +57,15 @@ class Product extends Component {
                             { e.size === null ? <div></div> : <span className='optional_product_displays_text'>Size: {e.size}</span> }
                             </div>
                             <span className="price_text_no_sale">${e.price}</span>
+                            { this.props.user === "puppie" ? 
                             <div className="add_cart_container">
                             <input type="number" className='quantity' min="1" max="20" placeholder={this.state.quantity} onChange={(e) => this.quantityHandler('quantity', e.target.value)}/>
-                            
+                            <a href={process.env.REACT_APP_LOGIN}><button type='' className='add_cart_button' >Add To Cart</button></a>
+                            </div> : 
+                            <div className="add_cart_container">
+                            <input type="number" className='quantity' min="1" max="20" placeholder={this.state.quantity} onChange={(e) => this.quantityHandler('quantity', e.target.value)}/>
                             <button type='' className='add_cart_button'>Add To Cart</button>
-                            </div>
+                            </div>}
                             </div>
                               
                         )
@@ -69,4 +75,9 @@ class Product extends Component {
         )
     }
 }
-export default Product;
+function mapStateToProps(state){
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps)(Product);

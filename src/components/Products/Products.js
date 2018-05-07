@@ -3,6 +3,7 @@ import Header from "../Header/Header.js";
 import Drop from '../../utilities/Drop.js';
 import axios from 'axios';
 import DropClubs from '../Dashboard/dashboard_assets/drop_clubs.png';
+import { Link } from 'react-router-dom';
 import './Products.css';
 
 
@@ -26,6 +27,8 @@ class Products extends Component{
         this.getProductType = this.getProductType.bind(this);
         this.getProductClass = this.getProductClass.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
+        this.apparelBrandSearch = this.apparelBrandSearch.bind(this);
+        this.getApparelProductClass = this.getApparelProductClass.bind(this);
     }
 
     componentDidMount(){
@@ -50,6 +53,15 @@ class Products extends Component{
             [prop]: val
         })
     }
+    apparelBrandSearch(){
+        const brand = this.state.brand;
+        const displayProducts = this.state.displayProducts;
+        axios.get(`/api/apparelBrandSearch/${brand}`).then(response => {
+            this.setState({
+                displayProducts: response.data
+            })
+        })
+    }
     searchBrand(){
         const brand = this.state.brand;
         const displayProducts = this.state.displayProducts;
@@ -62,6 +74,14 @@ class Products extends Component{
     getProductType(){
         const selection = this.props.match.params.destination;
         axios.get(`/api/product_type/${selection}`).then(response =>{
+            console.log(response.data);
+        this.setState({
+            displayProducts:response.data
+        })  });
+    }
+    getApparelProductClass(){
+        const product_class = this.state.product_class;
+        axios.get(`/api/product_class/${product_class}`).then(response =>{
             console.log(response.data);
         this.setState({
             displayProducts:response.data
@@ -100,8 +120,8 @@ class Products extends Component{
                 >Brand:</span>
                 <select className="inventory_drop_down" onChange={ (e) => this.updateHandler('brand', e.target.value)}>
                 <option value={null}>{ this.state.brand === null ? "--Select--" : this.state.brand }</option>
-                { club_brand.map( club_brand =>(
-                    <option key={ club_brand.value} value={club_brand.value}>{club_brand.label}</option>
+                { brand.map( brand =>(
+                    <option key={ brand.value} value={ brand.value}>{brand.label}</option>
                 )) }
                 </select>
                 <button type='button' className='products_search_button' onClick={ () => this.searchBrand()}>Search</button>
@@ -143,7 +163,7 @@ class Products extends Component{
                     <option key={ clothe_brand.value} value={clothe_brand.value}>{clothe_brand.label}</option>
                 )) }
                 </select>
-                <button type='button' className='products_search_button' onClick={ () => this.searchBrand()}>Search</button>
+                <button type='button' className='products_search_button' onClick={ () => this.apparelBrandSearch()}>Search</button>
                 </div> : <div></div>  }
                 { this.state.apparelSearchVal === "product_class" ? 
                 <div>
@@ -153,7 +173,7 @@ class Products extends Component{
                     <option key={ apparel_class.value} value={apparel_class.value}>{apparel_class.label}</option>
                 )) }
                 </select>
-                <button type='button' className='products_search_button' onClick={ () => this.searchBrand()}>Search</button>
+                <button type='button' className='products_search_button' onClick={ () => this.getApparelProductClass()}>Search</button>
                 </div> : <div></div>  }
                 </div>
             )
@@ -175,7 +195,7 @@ class Products extends Component{
                             <div key={ e.id } className="products_display_child">
                             <img src={ e.picture} alt='' className="products_displays_image"/>
                             
-                            <span className='product_displays_text'>{e.brand} {e.model}</span>
+                            <Link to={`/product/${e.id}`}><span className='product_displays_text'>{e.brand} {e.model}</span></Link>
                             <div className="optional_displays">
                             { e.flex === null ? <div></div> : <div> <span className='optional_product_displays_text'>  Flex:</span>
                             <br/>

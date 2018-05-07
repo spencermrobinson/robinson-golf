@@ -68,4 +68,20 @@ module.exports = {
         }).catch((err) => res.status(500).send(console.log(err)));
 
     },
+
+    apparelBrandSearch: (req, res) => {
+        const db = req.app.get('db');
+        db.products.searchByBrandApparel([req.params.brand]).then( response => {
+            console.log('apparel brand', response)
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
+
+    getBrand: (req, res) => {
+        const db = req.app.get('db');
+        db.product.getProduct([req.params.id]).then( response => {
+            console.log('specific product', response)
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    }
 }

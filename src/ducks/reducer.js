@@ -31,11 +31,22 @@ const ADD_ADMIN = 'ADD_ADMIN';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 const RESET_PRODUCTS = 'RESET_PRODUCTS';
 const GET_CART = 'GET_CART';
+const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
+
+        case UPDATE_QUANTITY: {
+            let newState = Object.assign({}, state);
+            for( var l = 0; newState.cart.length > l; l++){
+                if(newState.cart[l].product_id === payload.product_id){
+                newState.cart[l].product_quantity = payload.product_quantity
+                }
+            }
+            return newState
+        }
 
         case RESET_PRODUCTS: {
             let newState = Object.assign({}, state);
@@ -77,6 +88,14 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function updateQuantity(obj){
+    console.log('reducer hit: ', obj)
+    return {
+        type: UPDATE_QUANTITY,
+        payload: obj
+    }
+}
 
 export function getCart(){
     const promise = axios.get('/api/getCart').then(response => 

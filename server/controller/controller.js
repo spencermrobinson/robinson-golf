@@ -97,5 +97,12 @@ module.exports = {
             console.log('fetched cart:', response)
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
+    },
+
+    deleteFromCart: (req, res)=> {
+        const db = req.app.get('db');
+        db.orders.deleteFromCart([req.params.product_id, req.user.id]).then( response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
     }
 }

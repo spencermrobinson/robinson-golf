@@ -3,14 +3,14 @@ module.exports = {
     checkLogin: (req, res) => {
         const db = req.app.get('db');
 
-        if(!req.user){
-            res.status(200).send('puppie')
-            }else{
-                    db.users.find_session_user([req.user.id]).then( response => {
+        // if(!req.user){
+        //     res.status(200).send('puppie')
+        //     }else{
+                    db.users.find_session_user([1]).then( response => {
                         res.status(200).send(response[0])
                     }).catch( (err) => res.status(500).send(console.log(err)))
                 
-            }
+            // }
     }, 
 
     getAdmins: (req, res) => {
@@ -102,6 +102,14 @@ module.exports = {
     deleteFromCart: (req, res)=> {
         const db = req.app.get('db');
         db.orders.deleteFromCart([req.params.product_id, req.user.id]).then( response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
+    
+    updateQuantity: (req, res) => {
+        console.log('req.params:', req.params)
+        const db = req.app.get('db');
+        db.orders.updateQuantity([req.params.quantity, req.params.product_id, 1]).then( response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
     }

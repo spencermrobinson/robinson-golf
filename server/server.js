@@ -101,5 +101,6 @@ passport.use( new Auth0Strategy({
     app.post('/api/addToCart/:product_id/:quantity', ctrl.addToCart);
     app.get('/api/getCart', ctrl.getCart );
     app.delete('/api/deleteFromCart/:product_id', ctrl.deleteFromCart);
+    app.put('/api/updateQuantity/:quantity/:product_id', ctrl.updateQuantity);
     
     app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));

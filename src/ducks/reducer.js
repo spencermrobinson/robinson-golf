@@ -4,6 +4,7 @@ const initialState = {
     user: null,
     admins: null,
     cart: [],
+    total: null,
     products: {
         product_type: null,
         product_class: null,
@@ -32,11 +33,18 @@ const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 const RESET_PRODUCTS = 'RESET_PRODUCTS';
 const GET_CART = 'GET_CART';
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
+const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
 export default ( state = initialState, action) => {
     const { payload } = action;
 
     switch( action.type ){
+
+        case UPDATE_TOTAL: {
+            return Object.assign( {}, state, {total: payload});
+        }
 
         case UPDATE_QUANTITY: {
             let newState = Object.assign({}, state);
@@ -85,9 +93,47 @@ export default ( state = initialState, action) => {
         case GET_CART + '_FULFILLED': 
         return Object.assign( {}, state, {cart: payload});
 
+        case REMOVE_FROM_CART + '_FULFILLED':
+        return Object.assign( {}, state, {cart: payload});
+
+        case UPDATE_CART_QUANTITY + '_FULFILLED':
+        return Object.assign( {}, state, { cart: payload});
+
+        case UPDATE_TOTAL: {
+            return Object.assign( {}, state, {total: payload});
+        }
+
         default: return state; 
     }
 };
+
+export function updateTotal(num){
+    return{
+        type: UPDATE_TOTAL,
+        payload: num
+    }
+}
+
+export function updateCartQuantity(quantity ,product_id){
+    console.log('hit update', quantity, product_id)
+    const promise = axios.put(`/api/updateQuantity/${quantity}/${product_id}`).then( response =>
+    response.data
+    )
+    return {
+        type: UPDATE_CART_QUANTITY,
+        payload: promise
+    }
+}
+
+export function removeFromCart(id){
+    const promise = axios.delete(`/api/deleteFromCart/${id}`).then(response => 
+    response.data
+    )
+    return {
+        type: REMOVE_FROM_CART, 
+        payload: promise
+    }
+}
 
 export function updateQuantity(obj){
     console.log('reducer hit: ', obj)

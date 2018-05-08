@@ -11,6 +11,7 @@ import Orders from './components/Orders/Orders.js';
 import Products from './components/Products/Products.js';
 import Product from './components/Product/Product.js';
 import Cart from './components/Cart/Cart.js';
+import CheckOut from './components/Cart/CheckOut.js';
 
 export default function Routes(){
     return(
@@ -26,6 +27,7 @@ export default function Routes(){
             <Route path='/products/:destination' component={ Products}/>
             <Route path='/product/:id' component={ Product } />
             <Route path='/cart/:id' component={ Cart }/>
+            <Route path='/checkout' component={ CheckOut} />
             
         </Switch>
     )

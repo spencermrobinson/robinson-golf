@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
-import { getCart, updateQuantity } from '../../ducks/reducer.js';
+import { getCart, updateQuantity, removeFromCart, updateCartQuantity, updateTotal } from '../../ducks/reducer.js';
 import axios from 'axios';
 import './Cart.css';
 
@@ -15,6 +15,7 @@ class Cart extends Component{
         }
         this.addTotal = this.addTotal.bind(this);
         this.changeQuantity = this.changeQuantity.bind(this);
+        this.updateCart = this.updateCart.bind(this);
     }
     componentDidMount(){
        this.props.getCart();
@@ -33,9 +34,7 @@ class Cart extends Component{
         return total
         
     }
-    removeFromCart(id){
-        axios.delete(`/api/deleteFromCart/${id}`).then()
-    }
+    
 
     changeQuantity(prop, val, num){
         const quantity = parseInt(this.state.quantity) +1;
@@ -43,6 +42,14 @@ class Cart extends Component{
             [prop]: val
         })
         this.props.updateQuantity({product_id: num, product_quantity: quantity})
+    }
+    updateCart(num){
+        this.props.updateTotal(num)
+        this.props.cart.map( e => { 
+            this.props.updateCartQuantity(e.product_quantity, e.product_id);
+            this.props.history.push(`/checkout`)
+            }
+        )
     }
 
     render(){
@@ -64,6 +71,7 @@ class Cart extends Component{
                     <div className="cart_display_container">{this.props.cart.map( (e, i) => {
                         return(
                             <div key={ e.id } className="cart_display_child">
+                            
                             <img src={ e.picture} alt='' className="cart_displays_image"/>
                             
                            <span className='product_displays_text'>{e.brand} {e.model}</span>
@@ -82,9 +90,20 @@ class Cart extends Component{
                             <span className='optional_product_displays_text'>Qty:</span>
                             <input type="number" className='quantity' min="1" max="20" placeholder={ (e.product_quantity) } onChange={(m) => this.changeQuantity( 'quantity' , m.target.value, e.product_id )}/>
                             <span className="price_text_no_sale">${e.price}</span>
+                            <div className="remove_product"><button type='button' className='remove_button' onClick={() => this.props.removeFromCart( e.product_id )}>Remove</button></div> 
                             </div> 
                         )
                     })}</div> : <div></div>  }</div>
+                    <div className="checkout_display">
+                    <div className="tax_total_container">
+                    <span className='checkout_text_tax'>Tax: ${finalTax}</span>
+                    <br/>
+                    <span className="checkout_text_total">Total: ${finalTotal}</span>
+                    </div> 
+                    <div className="checkout_button_container"> 
+                    <button type='button' className='checkout_button' onClick={() => this.updateCart(finalTotal)}>Continue to Checkout</button>
+                    </div>
+                    </div> 
                 
             </div> 
         )
@@ -96,4 +115,4 @@ function mapStateToProps(state){
         cart: state.cart
     }
 }
-export default connect(mapStateToProps, { getCart, updateQuantity })(Cart);
+export default connect(mapStateToProps, { getCart, updateQuantity, removeFromCart, updateCartQuantity, updateTotal })(Cart);

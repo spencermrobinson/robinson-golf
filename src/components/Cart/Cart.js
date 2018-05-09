@@ -73,8 +73,9 @@ class Cart extends Component{
                             <div key={ e.id } className="cart_display_child">
                             
                             <img src={ e.picture} alt='' className="cart_displays_image"/>
-                            
+                            <div className="cart_description"> 
                            <span className='product_displays_text'>{e.brand} {e.model}</span>
+                           </div>
                             <div className="optional_displays">
                             { e.flex === null ? <div></div> : <div> <span className='optional_product_displays_text'>  Flex:</span>
                             <br/>
@@ -87,10 +88,12 @@ class Cart extends Component{
                             { e.size === null ? <div></div> : <span className='optional_product_displays_text'>Size: {e.size}</span> }
                             
                             </div>
+                            
+                            <span className="price_text_no_sale">${e.price}</span>
+                            <div className="remove_product">
                             <span className='optional_product_displays_text'>Qty:</span>
                             <input type="number" className='quantity' min="1" max="20" placeholder={ (e.product_quantity) } onChange={(m) => this.changeQuantity( 'quantity' , m.target.value, e.product_id )}/>
-                            <span className="price_text_no_sale">${e.price}</span>
-                            <div className="remove_product"><button type='button' className='remove_button' onClick={() => this.props.removeFromCart( e.product_id )}>Remove</button></div> 
+                            <button type='button' className='remove_button' onClick={() => this.props.removeFromCart( e.product_id )}>Remove</button></div> 
                             </div> 
                         )
                     })}</div> : <div></div>  }</div>

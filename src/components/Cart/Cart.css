@@ -1,22 +1,25 @@
 .cart_display_container{
     margin: 10px;
 }
+.cart_description {
+    width: 60px;
+}
 .cart_display_child {
     height: 20vh;
     width: 100%;
     -webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-    margin: 6px;
+    margin: 4px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 }
 .cart_displays_image {
-    height: 60px;
-    width: 80px;
-    margin: 4px;
+    height: 50px;
+    width: 70px;
+    margin: 8px;
 }
 .checkout_display{
     display: flex;

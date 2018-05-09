@@ -12,31 +12,44 @@ class CheckOut extends Component {
     constructor(props){
         super(props);
         this.state = {
-            email: null,
-            address: null,
-            city: null, 
-            home_state: null,
-            zip: null,
-            phone: null
+            email: this.props.user.email || null,
+            address: this.props.user.address || null,
+            city: this.props.user.city || null, 
+            home_state: this.props.user.home_state || null,
+            zip: this.props.user.zip || null,
+            phone: this.props.user.phone || null,
+            checkout: false
 
         }
         this.infoHandler = this.infoHandler.bind(this);
         this.checkOut = this.checkOut.bind(this);
         this.onToken = this.onToken.bind(this);
         this.addToOrders = this.addToOrders.bind(this);
-        this.paidTrue = this.paidTrue.bind(this);
+        this.buttonChanger = this.buttonChanger.bind(this);
+       
 
     }
 
     onToken = (token) => {
-        
+        const checkout = this.state.checkout;
         const total = this.props.total;
         token.card = void 0;
         console.log('token:', token);
         axios.post('/api/payment', { token, amount: total}).then(response => {
-            alert('We are in business')
+            alert('We are in business');
+            axios.put('/api/paidTrue').then(()=>{
+            this.setState({ checkout: false});
+            this.props.history.push('/')
+            })
         });
     }
+
+    buttonChanger(){
+        let checkout = this.state.checkout;
+        this.setState({
+            checkout: true
+        })
+        }
 
     addToOrders(){
         this.props.cart.map( e => { 
@@ -45,11 +58,7 @@ class CheckOut extends Component {
             }
         )
     }
-    paidTrue(){
-        axios.put('/api/paidTrue').then(()=>
-        console.log('paidTrue') 
-    )
-    }
+    
 
     checkOut(){
         const { email, address, city, home_state, zip, phone} =this.state;
@@ -72,6 +81,7 @@ class CheckOut extends Component {
     render(){
         console.log('state:', this.state);
         const user= this.props.user;
+        const checkout = this.state.checkout
         return(
             <div>
                 <div>
@@ -104,7 +114,7 @@ class CheckOut extends Component {
                 </div>
                 <div className="input_text_container">
                     <span className='checkout_display_text'>Zip:</span>
-                    <input type='number' className='checkout_inputs' placeholder={user.zip} onChange={(e) => this.infoHandler('zip', e.target.value)}/>
+                    <input type='number' className='checkout_inputs' placeholder={user.zip}  onChange={(e) => this.infoHandler('zip', e.target.value)}/>
                 </div>
                 <div className="input_text_container">
                     <span className='checkout_display_text'>Phone:</span>
@@ -113,12 +123,15 @@ class CheckOut extends Component {
                 </div>   }
                 <div>
                 <button type='button' className='complete_purchase' onClick={()=> {
-                    this.addToOrders();
-                    this.checkOut()}}>Update Info</button>
-                <StripeCheckout
-                token={this.onToken}
-                stripeKey={process.env.REACT_APP_PUBLIC_KEY}
-                amount={this.props.total}/> 
+                        this.addToOrders();
+                        this.checkOut();
+                        this.buttonChanger();}}>Update Info</button>
+                        <StripeCheckout
+                            token={this.onToken}
+                            stripeKey={process.env.REACT_APP_PUBLIC_KEY}
+                            amount={this.props.total}/>
+                
+                
                 </div>  
             </div> 
         )

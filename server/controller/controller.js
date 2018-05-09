@@ -120,4 +120,18 @@ module.exports = {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
     },
+
+    addToOrders: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.addCartToOrders([1, req.params.product_id, req.params.product_quantity]).then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)))
+    },
+    
+    paidTrue: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.orderPaid([1]).then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    }
 }

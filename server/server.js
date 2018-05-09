@@ -104,6 +104,8 @@ passport.use( new Auth0Strategy({
     app.delete('/api/deleteFromCart/:product_id', ctrl.deleteFromCart);
     app.put('/api/updateQuantity/:quantity/:product_id', ctrl.updateQuantity);
     app.put('/api/userCheckout', ctrl.updateUserCheckout);
+    app.post('/api/addToOrders/:product_id/:product_quantity', ctrl.addToOrders);
+    app.put('/api/paidTrue', ctrl.paidTrue);
 
     app.post('/api/payment', function(req, res, next){
         const amountArray = req.body.amount.toString().split('');
@@ -133,9 +135,11 @@ passport.use( new Auth0Strategy({
         source: req.body.token.id,
         description: 'Test charge from react app'
       }, function(err, charge) {
+          
           if (err) return res.sendStatus(500)
-          return res.sendStatus(200);
+          return res.status(200).send(charge);
       });
+       
       });
     
     app.listen( SERVER_PORT, () => console.log(`Listening to port: ${SERVER_PORT} `));

@@ -37,6 +37,7 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
+
 export default ( state = initialState, action) => {
     const { payload } = action;
 
@@ -99,9 +100,11 @@ export default ( state = initialState, action) => {
         case UPDATE_CART_QUANTITY + '_FULFILLED':
         return Object.assign( {}, state, { cart: payload});
 
+
         case UPDATE_TOTAL: {
-            return Object.assign( {}, state, {total: payload});
-        }
+            return Object.assign( {}, state, {total: payload})};
+        
+        
 
         default: return state; 
     }

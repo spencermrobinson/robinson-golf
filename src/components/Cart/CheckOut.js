@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 
+
 import './Cart.css';
 
 
@@ -22,17 +23,32 @@ class CheckOut extends Component {
         this.infoHandler = this.infoHandler.bind(this);
         this.checkOut = this.checkOut.bind(this);
         this.onToken = this.onToken.bind(this);
+        this.addToOrders = this.addToOrders.bind(this);
+        this.paidTrue = this.paidTrue.bind(this);
 
     }
 
     onToken = (token) => {
-    
+        
         const total = this.props.total;
         token.card = void 0;
         console.log('token:', token);
         axios.post('/api/payment', { token, amount: total}).then(response => {
             alert('We are in business')
         });
+    }
+
+    addToOrders(){
+        this.props.cart.map( e => { 
+            axios.post(`/api/addToOrders/${e.product_id}/${e.product_quantity}`).then(()=>
+        console.log('success'))
+            }
+        )
+    }
+    paidTrue(){
+        axios.put('/api/paidTrue').then(()=>
+        console.log('paidTrue') 
+    )
     }
 
     checkOut(){
@@ -96,12 +112,13 @@ class CheckOut extends Component {
                 </div>
                 </div>   }
                 <div>
-                <button type='button' className='complete_purchase' onClick={()=> this.checkOut()}>Update Info</button>
+                <button type='button' className='complete_purchase' onClick={()=> {
+                    this.addToOrders();
+                    this.checkOut()}}>Update Info</button>
                 <StripeCheckout
                 token={this.onToken}
-                stripeKey={process.env.PUBLIC_KEY}
-                amount={this.props.total}
-                />
+                stripeKey={process.env.REACT_APP_PUBLIC_KEY}
+                amount={this.props.total}/> 
                 </div>  
             </div> 
         )
@@ -110,7 +127,8 @@ class CheckOut extends Component {
 function mapStateToProps(state){
     return {
         user: state.user,
-        total: state.total
+        total: state.total,
+        cart: state.cart
     }
 }
 export default connect(mapStateToProps, {})(CheckOut);

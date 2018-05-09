@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { checkLogin, logout } from '../../ducks/reducer.js';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import user_profile from './header-assets/user.png';
-import inventory from './header-assets/inventory.png';
+import inventory from './header-assets/cropped_clipboard.png';
 import robinson_ball from './header-assets/golf_robinson_ball.png';
+import golf_cart from './header-assets/golfcart_icon.png';
+import white_profile from './header-assets/white_profile_icon.png';
 
 import './Header.css'
 
@@ -24,18 +25,19 @@ class Header extends Component {
         
         
         let headerRender = function(user){
+            
             if( user === null || user ==="puppie"){
                 return (
                     <div>
-                    <a href={process.env.REACT_APP_LOGIN}><img src={user_profile} alt="" className="header_user_profile"/></a>
+                    <a href={process.env.REACT_APP_LOGIN}><img src={white_profile} alt="" className="header_user_profile"/></a>
                     </div>
                 )
             }else if(  user.admin === true ){
                 return(
                     <div>
-                    <span className="header_user_name"
-                    >{user.firstname}</span>
-                    <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} alt="" className="header_user_profile"/></a>
+                    
+                    <a href={'http://localhost:7272/auth/logout'}><img src={white_profile} alt="" className="header_user_profile"/></a>
+                    <Link to={`/cart/${user.id}`}><img src={golf_cart} alt='' className="header_golf_cart"/></Link>
                     <Link to="/manage"><img src={ inventory } alt="" className="header_inventory"/></Link>
                     </div> 
                 )
@@ -43,9 +45,9 @@ class Header extends Component {
                 if(user !== null && user !== undefined){
                 return(
                     <div>
-                    <span className="header_user_name"
-                    >{user.firstname}</span>
-                        <a href={'http://localhost:7272/auth/logout'}><img src={user_profile} alt="" className="header_user_profile"/></a>
+                    
+                        <a href={'http://localhost:7272/auth/logout'}><img src={white_profile} alt="" className="header_user_profile"/></a>
+                        <Link to={`/cart/${user.id}`}><img src={golf_cart} alt='' className="header_golf_cart"/></Link>
                     </div> 
                 )}
             }

@@ -4,6 +4,15 @@
 .cart_description {
     width: 60px;
 }
+.currently_empty {
+    margin: 60px;
+}
+.currently_empty_text{
+    font-size: 20px;
+    font-weight: 600;
+    color: #3c826c;
+}
+
 .cart_display_child {
     height: 20vh;
     width: 100%;

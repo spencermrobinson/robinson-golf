@@ -12,6 +12,12 @@
     
 
 }
+.header_golf_cart{
+    height: 60px;
+    width: 60px;
+    position: relative;
+    top: 12px;
+}
 .robinson_ball {
     height: 60px;
     width: 60px;
@@ -29,13 +35,15 @@
 }
 
 .header_user_profile{
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     
 }
 .header_inventory {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: 4px;
     
 }
 .header_user_name {

@@ -96,7 +96,8 @@ class Cart extends Component{
                             <button type='button' className='remove_button' onClick={() => this.props.removeFromCart( e.product_id )}>Remove</button></div> 
                             </div> 
                         )
-                    })}</div> : <div></div>  }</div>
+                    })}</div> : <div className="currently_empty"><span className='currently_empty_text'
+                    >Your cart is currently empty</span></div>  }</div>
                     <div className="checkout_display">
                     <div className="tax_total_container">
                     <span className='checkout_text_tax'>Tax: ${finalTax}</span>

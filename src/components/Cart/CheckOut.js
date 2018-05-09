@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import StripeCheckout from 'react-stripe-checkout';
+
 import './Cart.css';
 
 
 class CheckOut extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            firstname: null,
-            lastname: null,
             email: null,
             address: null,
             city: null, 
@@ -19,7 +20,31 @@ class CheckOut extends Component {
 
         }
         this.infoHandler = this.infoHandler.bind(this);
+        this.checkOut = this.checkOut.bind(this);
+        this.onToken = this.onToken.bind(this);
 
+    }
+
+    onToken = (token) => {
+    
+        const total = this.props.total;
+        token.card = void 0;
+        console.log('token:', token);
+        axios.post('/api/payment', { token, amount: total}).then(response => {
+            alert('We are in business')
+        });
+    }
+
+    checkOut(){
+        const { email, address, city, home_state, zip, phone} =this.state;
+        axios.put('/api/userCheckout', {
+            email,
+            address,
+            city,
+            home_state,
+            zip,
+            phone
+        }).then(()=> console.log('success'))
     }
 
     infoHandler(prop, val){
@@ -71,7 +96,12 @@ class CheckOut extends Component {
                 </div>
                 </div>   }
                 <div>
-                <button type='button' className='complete_purchase'>Complete Purchase</button>
+                <button type='button' className='complete_purchase' onClick={()=> this.checkOut()}>Update Info</button>
+                <StripeCheckout
+                token={this.onToken}
+                stripeKey={process.env.PUBLIC_KEY}
+                amount={this.props.total}
+                />
                 </div>  
             </div> 
         )

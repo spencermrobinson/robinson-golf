@@ -3,14 +3,14 @@ module.exports = {
     checkLogin: (req, res) => {
         const db = req.app.get('db');
 
-        // if(!req.user){
-        //     res.status(200).send('puppie')
-        //     }else{
+        if(!req.user){
+            res.status(200).send('puppie')
+            }else{
                     db.users.find_session_user([1]).then( response => {
                         res.status(200).send(response[0])
                     }).catch( (err) => res.status(500).send(console.log(err)))
                 
-            // }
+            }
     }, 
 
     getAdmins: (req, res) => {
@@ -93,7 +93,7 @@ module.exports = {
     }, 
     getCart: (req, res) => {
         const db = req.app.get('db');
-        db.orders.getCart([1]).then(response => {
+        db.orders.getCart([req.user.id]).then(response => {
             console.log('fetched cart:', response)
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
@@ -109,8 +109,15 @@ module.exports = {
     updateQuantity: (req, res) => {
         console.log('req.params:', req.params)
         const db = req.app.get('db');
-        db.orders.updateQuantity([req.params.quantity, req.params.product_id, 1]).then( response => {
+        db.orders.updateQuantity([req.params.quantity, req.params.product_id, req.user.id]).then( response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
-    }
+    },
+    updateUserCheckout: (req, res) => {
+        const db = req.app.get('db');
+        console.log('req.body:', req.body)
+        db.users.updateUserCheckout([ req.user.id, req.body.email, req.body.address, req.body.city, req.body.home_state, req.body.zip, req.body.phone]).then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
 }

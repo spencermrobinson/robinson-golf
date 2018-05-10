@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
 import { getCart, updateQuantity, removeFromCart, updateCartQuantity, updateTotal } from '../../ducks/reducer.js';
-import axios from 'axios';
 import './Cart.css';
 
 
@@ -45,7 +44,7 @@ class Cart extends Component{
     }
     updateCart(num){
         this.props.updateTotal(num)
-        this.props.cart.map( e => { 
+        this.props.cart.map( (e) => { 
             this.props.updateCartQuantity(e.product_quantity, e.product_id);
             this.props.history.push(`/checkout`)
             }

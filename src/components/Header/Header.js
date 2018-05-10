@@ -36,7 +36,7 @@ class Header extends Component {
                 return(
                     <div>
                     
-                    <a href={'http://localhost:7272/auth/logout'}><img src={white_profile} alt="" className="header_user_profile"/></a>
+                    <a href={process.env.REACT_APP_LOGOUT}><img src={white_profile} alt="" className="header_user_profile"/></a>
                     <Link to={`/cart/${user.id}`}><img src={golf_cart} alt='' className="header_golf_cart"/></Link>
                     <Link to="/manage"><img src={ inventory } alt="" className="header_inventory"/></Link>
                     </div> 
@@ -46,7 +46,7 @@ class Header extends Component {
                 return(
                     <div>
                     
-                        <a href={'http://localhost:7272/auth/logout'}><img src={white_profile} alt="" className="header_user_profile"/></a>
+                        <a href={process.env.REACT_APP_LOGOUT}><img src={white_profile} alt="" className="header_user_profile"/></a>
                         <Link to={`/cart/${user.id}`}><img src={golf_cart} alt='' className="header_golf_cart"/></Link>
                     </div> 
                 )}

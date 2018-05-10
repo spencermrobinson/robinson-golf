@@ -133,5 +133,11 @@ module.exports = {
         db.orders.orderPaid([1]).then(response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
-    }
+    },
+    getOrders: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.getOrders().then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
 }

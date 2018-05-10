@@ -5,6 +5,7 @@ const initialState = {
     admins: null,
     cart: [],
     total: null,
+    orders: null,
     products: {
         product_type: null,
         product_class: null,
@@ -36,6 +37,7 @@ const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
+const GET_ORDERS = 'GET_ORDERS';
 
 
 export default ( state = initialState, action) => {
@@ -100,6 +102,9 @@ export default ( state = initialState, action) => {
         case UPDATE_CART_QUANTITY + '_FULFILLED':
         return Object.assign( {}, state, { cart: payload});
 
+        case GET_ORDERS + '_FULFILLED': 
+        return Object.assign({}, state, {orders: payload});
+
 
         case UPDATE_TOTAL: {
             return Object.assign( {}, state, {total: payload})};
@@ -109,6 +114,12 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+// export function getOrders(){
+//     const promise = axios.get('/api/getOrders').then( response => {
+
+//     })
+// }
 
 export function updateTotal(num){
     return{

@@ -15,10 +15,15 @@ const {
     DOMAIN,
     CLIENT_ID,
     CLIENT_SECRET,
-    CALLBACK_URL
+    CALLBACK_URL,
+    DASHBOARD_URL,
+    FAILURE_REDIRECT_URL
 }=process.env;
 
 const app = express();
+
+app.use( express.static( `${__dirname}/../build` ) );
+
 app.use(bodyParser.json());
 
 massive(CONNECTION_STRING).then( db => {
@@ -71,8 +76,8 @@ passport.use( new Auth0Strategy({
 
     app.get('/auth0', passport.authenticate('auth0'));
     app.get('/auth/callback', passport.authenticate('auth0', {
-        successRedirect: 'http://localhost:3000/#/',
-        failureRedirect: 'http://localhost:3000/#/auth'
+        successRedirect: DASHBOARD_URL,
+        failureRedirect: FAILURE_REDIRECT_URL
         
     }));
 
@@ -85,7 +90,7 @@ passport.use( new Auth0Strategy({
     })
     app.get('/auth/logout', (req, res) => {
         req.logOut();
-        res.redirect('http://localhost:3000/#/')
+        res.redirect(DASHBOARD_URL)
         console.log('User logout successful', req.user)
     });
 
@@ -106,11 +111,12 @@ passport.use( new Auth0Strategy({
     app.put('/api/userCheckout', ctrl.updateUserCheckout);
     app.post('/api/addToOrders/:product_id/:product_quantity', ctrl.addToOrders);
     app.put('/api/paidTrue', ctrl.paidTrue);
+    app.get('/api/getOrders', ctrl.getOrders);
 
     app.post('/api/payment', function(req, res, next){
         const amountArray = req.body.amount.toString().split('');
         const pennies = [];
-        for (var i = 0; i < amountArray.length; i++) {
+        for (var i = 0; i < amountArray.length; i++){
           if(amountArray[i] === ".") {
             if (typeof amountArray[i + 1] === "string") {
               pennies.push(amountArray[i + 1]);

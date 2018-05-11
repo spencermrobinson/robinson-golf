@@ -8,6 +8,7 @@ const initialState = {
     orders: [],
     order: [],
     client: [],
+    sales: [],
     products: {
         product_type: null,
         product_class: null,
@@ -43,6 +44,7 @@ const GET_ORDERS = 'GET_ORDERS';
 const GET_SPECIFIC_ORDER = 'GET_SPECIFIC_ORDER';
 const PRODUCT_FULFILLED = 'PRODUCT_FULFILLED';
 const GET_CLIENT = 'GET_CLIENT';
+const SALES_BRAND = 'SALES_BRAND';
 
 
 
@@ -125,6 +127,9 @@ export default ( state = initialState, action) => {
 
         case GET_CLIENT + '_FULFILLED':
         return Object.assign({}, state, {client: payload});
+
+        case SALES_BRAND + '_FULFILLED':
+        return Object.assign({}, state, {sales: payload})
         
         
         
@@ -133,6 +138,16 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function salesBrand(){
+    const promise = axios.get('/api/salesByBrand').then( response => 
+    response.data
+    )
+    return {
+        type: SALES_BRAND,
+        payload: promise
+    }
+}
 
 export function getClient(id){
     const promise = axios(`/api/getClient/${id}`).then(response => 

@@ -165,7 +165,7 @@ module.exports = {
 
     salesByBrand: (req, res) => {
         const db = req.app.get('db');
-        db.orders.salesByBrand().then(response => {
+        db.sales.salesByBrand().then(response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
     },

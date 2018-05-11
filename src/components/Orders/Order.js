@@ -1,24 +1,30 @@
 import React, {Component } from 'react';
 import Header from '../Header/Header.js';
 import { connect } from 'react-redux';
-import { getSpecificOrder, productFulfilled } from '../../ducks/reducer.js';
+import { getSpecificOrder, productFulfilled, getClient } from '../../ducks/reducer.js';
 import axios from 'axios';
 import './Orders.css'
 
 class Order extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            fulfilled: true
+            fulfilled: true,
+            firstname: this.props.client.firstname || null,
+            lastname: this.props.client.lastname || null,
+            email: this.props.client.email || null
         }
 
         this.addTotal = this.addTotal.bind(this);
         this.fulfillProduct = this.fulfillProduct.bind(this);
         this.orderFulfilled = this.orderFulfilled.bind(this);
+        this.sendEmail = this.sendEmail.bind(this);
     }
     componentDidMount(){
         const id = this.props.match.params.id;
         this.props.getSpecificOrder(id);
+        this.props.getClient(id)
+        
        
     }
 
@@ -28,15 +34,20 @@ class Order extends Component{
             this.setState({
                 fulfilled: true
             });
-            this.props.productFulfilled({id: num , fulfilled: fool});
+            
+            
+             this.props.productFulfilled({id: num , fulfilled: fool});
             this.setState({
                 fulfilled: false
-            })
+            });
             
+       
         }else{
             this.setState({
                 fulfilled: false
             });
+            const client = this.state;
+            
             this.props.productFulfilled({id: num , fulfilled: fool});
             this.setState({
                 fulfilled: true
@@ -74,8 +85,17 @@ class Order extends Component{
             }
         })
     }
+
+    sendEmail(){
+        const client = this.state;
+        axios.post('/api/sendEmail', {
+           firstname: client.firstname,
+           lastname: client.lastname,
+           email: client.email 
+        }).then(() => console.log(`Email send to ${client.firstname} ${client.lastname} at ${client.email}`))
+    }
     render(){
-        console.log('order#:', this.props.order);
+        console.log('client:', this.props.client);
         let total = this.addTotal();
         let tax = total * .075;
         let finalTax = tax.toFixed(2, 6);
@@ -112,7 +132,9 @@ class Order extends Component{
                             </div>
                             <div>
                             <span className="optional_product_displays_text">Product Fulfilled:</span>
-                            <input type='checkbox' className='' onClick={() =>{ this.fulfillProduct(e.id);
+                            <input type='checkbox' className='' onClick={() =>{
+                                 
+                                this.fulfillProduct(e.id);
                                 }}/>
                             </div>  
                             
@@ -126,7 +148,9 @@ class Order extends Component{
                         <span className="order_total">Order Total: { finalTotal }</span>
                     </div>
                     <div>
-                    <button type='button' className='fulfilled_button' onClick={() => this.orderFulfilled()}>Order Fulfilled</button>
+                    <button type='button' className='fulfilled_button' onClick={() => {
+                        this.sendEmail();
+                        this.orderFulfilled();}}>Order Fulfilled</button>
                     </div>  
 
             </div> 
@@ -135,7 +159,8 @@ class Order extends Component{
 }
 function mapStateToProps(state){
     return {
-        order: state.order
+        order: state.order, 
+        client: state.client,
     }
 }
-export default connect(mapStateToProps, { getSpecificOrder, productFulfilled })(Order);
+export default connect(mapStateToProps, { getSpecificOrder, productFulfilled, getClient })(Order);

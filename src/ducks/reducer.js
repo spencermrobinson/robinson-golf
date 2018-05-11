@@ -7,6 +7,7 @@ const initialState = {
     total: null,
     orders: [],
     order: [],
+    client: [],
     products: {
         product_type: null,
         product_class: null,
@@ -41,6 +42,7 @@ const UPDATE_TOTAL = 'UPDATE_TOTAL';
 const GET_ORDERS = 'GET_ORDERS';
 const GET_SPECIFIC_ORDER = 'GET_SPECIFIC_ORDER';
 const PRODUCT_FULFILLED = 'PRODUCT_FULFILLED';
+const GET_CLIENT = 'GET_CLIENT';
 
 
 
@@ -120,6 +122,9 @@ export default ( state = initialState, action) => {
 
         case GET_SPECIFIC_ORDER + '_FULFILLED':
         return Object.assign({}, state, {order: payload});
+
+        case GET_CLIENT + '_FULFILLED':
+        return Object.assign({}, state, {client: payload})
         
         case UPDATE_TOTAL: {
             return Object.assign( {}, state, {total: payload})};
@@ -129,6 +134,16 @@ export default ( state = initialState, action) => {
         default: return state; 
     }
 };
+
+export function getClient(id){
+    const promise = axios(`/api/getClient/${id}`).then(response => 
+    response.data
+    )
+    return {
+        type: GET_CLIENT,
+        payload: promise
+    }
+}
 
 export function getSpecificOrder(id){
     const promise = axios.get(`/api/getSpecificOrder/${id}`).then( response =>

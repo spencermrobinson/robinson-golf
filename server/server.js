@@ -7,6 +7,7 @@ const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const ctrl = require('./controller/controller.js');
 const twilio = require('twilio');
+const nodemailer = require('nodemailer');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const {
@@ -18,7 +19,10 @@ const {
     CLIENT_SECRET,
     CALLBACK_URL,
     DASHBOARD_URL,
-    FAILURE_REDIRECT_URL
+    FAILURE_REDIRECT_URL, 
+    SENDING_EMAIL,
+    SENDING_PASSWORD,
+    ROBINSON_NUMBER
 }=process.env;
 
 const app = express();
@@ -32,6 +36,15 @@ massive(CONNECTION_STRING).then( db => {
     console.log('db connected!')
     
 }).catch((err) => console.log(err));
+
+
+const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: SENDING_EMAIL, 
+            pass: SENDING_PASSWORD,
+        }
+    });
 
 
 
@@ -115,6 +128,7 @@ passport.use( new Auth0Strategy({
     app.get('/api/getOrders', ctrl.getOrders);
     app.get('/api/getSpecificOrder/:id', ctrl.getSpecifOrder);
     app.post('/api/addToSales', ctrl.addToSales);
+    app.get('/api/getClient/:id', ctrl.getClient);
 
     app.post('/api/sendMessage', (req, res) => {
         
@@ -125,9 +139,27 @@ passport.use( new Auth0Strategy({
         client.messages.create({
             body: req.body.msg,
             to: `+1${phone}`,
-            from: "+13852360962" 
+            from: ROBINSON_NUMBER, 
         }).then((message) => console.log(message.sid))
     } );
+
+    app.post('/api/sendEmail', (req, res) => {
+        console.log("req.body",req.body)
+        let { firstname, lastname, email } = req.body;
+        let mailOptions = {
+            from: SENDING_EMAIL,
+            to: email,
+            subject: 'Order Shipped',
+            text: `Thank you ${firstname} ${lastname} for your purchase. Your order has been shipped.`
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+    });
 
     app.post('/api/payment', function(req, res, next){
         const amountArray = req.body.amount.toString().split('');

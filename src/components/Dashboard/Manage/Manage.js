@@ -16,6 +16,7 @@ class Manage extends Component{
                 <Link to="/inventory"><button type='' className='admin_buttons'>Manage Inventory</button></Link>
                 <Link to="/admin"><button type='' className='admin_buttons'>Manage Administrators</button></Link>
                 <Link to="/orders"><button type='' className='admin_buttons'>Orders</button></Link>
+                <Link to="/sales"><button type='' className='admin_buttons'>Sales</button></Link>
                 </div>  
                 
             </div> 

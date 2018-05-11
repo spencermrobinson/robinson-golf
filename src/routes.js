@@ -13,6 +13,7 @@ import Products from './components/Products/Products.js';
 import Product from './components/Product/Product.js';
 import Cart from './components/Cart/Cart.js';
 import CheckOut from './components/Cart/CheckOut.js';
+import Sales from './components/Sales/Sales.js';
 
 export default function Routes(){
     return(
@@ -30,6 +31,7 @@ export default function Routes(){
             <Route path='/cart/:id' component={ Cart }/>
             <Route path='/checkout' component={ CheckOut} />
             <Route path='/order/:id' component={ Order} />
+            <Route path='/sales' component={ Sales} />
 
             
         </Switch>

@@ -28,7 +28,7 @@ class Order extends Component{
 
     fulfillProduct(num){
         const fool = this.state.fulfilled;
-        if(this.state.fulfilled == false){
+        if(this.state.fulfilled === false){
             this.setState({
                 fulfilled: true
             });
@@ -44,7 +44,7 @@ class Order extends Component{
             this.setState({
                 fulfilled: false
             });
-            const client = this.state;
+            
             
             this.props.productFulfilled({id: num , fulfilled: fool});
             this.setState({

@@ -32,7 +32,7 @@ class CheckOut extends Component {
     }
 
     onToken = (token) => {
-        const checkout = this.state.checkout;
+        
         const total = this.props.total;
         token.card = void 0;
         console.log('token:', token);

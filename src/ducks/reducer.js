@@ -124,10 +124,9 @@ export default ( state = initialState, action) => {
         return Object.assign({}, state, {order: payload});
 
         case GET_CLIENT + '_FULFILLED':
-        return Object.assign({}, state, {client: payload})
+        return Object.assign({}, state, {client: payload});
         
-        case UPDATE_TOTAL: {
-            return Object.assign( {}, state, {total: payload})};
+        
         
         
 

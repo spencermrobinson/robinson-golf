@@ -6,10 +6,7 @@ import { Link } from 'react-router-dom';
 import './Orders.css'
 
 class Orders extends Component{
-    constructor(){
-        super();
-        
-    }
+    
 
     componentDidMount(){
         this.props.getOrders();

@@ -10,9 +10,7 @@ class Order extends Component{
         super(props);
         this.state = {
             fulfilled: true,
-            firstname: this.props.client.firstname || null,
-            lastname: this.props.client.lastname || null,
-            email: this.props.client.email || null
+            
         }
 
         this.addTotal = this.addTotal.bind(this);
@@ -69,7 +67,9 @@ class Order extends Component{
     orderFulfilled(){
         const order = this.props.order;
         const order_id = this.props.match.params.id;
-        
+        const client = this.state;
+       
+
         order.map((e) => {
             if(e.fulfilled == true ){
             axios.post('/api/addToSales', {
@@ -87,7 +87,8 @@ class Order extends Component{
     }
 
     sendEmail(){
-        const client = this.state;
+        const client = this.props.client[0];
+        console.log('props client', this.props.client)
         axios.post('/api/sendEmail', {
            firstname: client.firstname,
            lastname: client.lastname,
@@ -132,10 +133,7 @@ class Order extends Component{
                             </div>
                             <div>
                             <span className="optional_product_displays_text">Product Fulfilled:</span>
-                            <input type='checkbox' className='' onClick={() =>{
-                                 
-                                this.fulfillProduct(e.id);
-                                }}/>
+                            <input type='checkbox' className='' onClick={() =>{this.fulfillProduct(e.id);}}/>
                             </div>  
                             
                             

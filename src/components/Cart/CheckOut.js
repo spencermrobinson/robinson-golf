@@ -26,6 +26,7 @@ class CheckOut extends Component {
         this.onToken = this.onToken.bind(this);
         this.addToOrders = this.addToOrders.bind(this);
         this.buttonChanger = this.buttonChanger.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
        
 
     }
@@ -39,9 +40,19 @@ class CheckOut extends Component {
             alert('We are in business');
             axios.put('/api/paidTrue').then(()=>{
             this.setState({ checkout: false});
+            this.sendMessage();
             this.props.history.push('/')
             })
         });
+    }
+
+    sendMessage(){
+        let p = this.state.phone;
+        let phonenum = p.replace(/-/g, "");
+        axios.post('api/sendMessage', {
+            msg: "Purchase complete. We are now processing your order and will notify you when it is shipped.",
+            phone: phonenum
+        })  
     }
 
     buttonChanger(){

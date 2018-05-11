@@ -6,6 +6,7 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const ctrl = require('./controller/controller.js');
+const twilio = require('twilio');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const {
@@ -114,6 +115,19 @@ passport.use( new Auth0Strategy({
     app.get('/api/getOrders', ctrl.getOrders);
     app.get('/api/getSpecificOrder/:id', ctrl.getSpecifOrder);
     app.post('/api/addToSales', ctrl.addToSales);
+
+    app.post('/api/sendMessage', (req, res) => {
+        
+        const accountSID = "ACb53a7da889cb578b9fce7ccea47fbc07";
+        const authToken = "3a3c9fb48f335e1c78a736f321316003";
+        const client = new twilio(accountSID, authToken);
+        const phone = req.body.phone;
+        client.messages.create({
+            body: req.body.msg,
+            to: `+1${phone}`,
+            from: "+13852360962" 
+        }).then((message) => console.log(message.sid))
+    } );
 
     app.post('/api/payment', function(req, res, next){
         const amountArray = req.body.amount.toString().split('');

@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getOrders } from '../../ducks/reducer.js';
+import { Link } from 'react-router-dom';
+import './Orders.css'
 
 class Orders extends Component{
     constructor(){
         super();
-        this.state = {
-            orders: []
-        }
-    }
-    componentDidMount(){
-        const orders = this.state.orders;
-        axios.get('/api/getOrders').then(response => {
-            orders.push(response.data)
-        })
+        
     }
 
+    componentDidMount(){
+        this.props.getOrders();
+    }
+    
+
     render(){
-        console.log('orders:', this.state.orders)
-        const orders = this.state.orders;
+        console.log('orders:', this.props.orders)
+        
         return(
             <div>
                 <div>
@@ -27,14 +27,18 @@ class Orders extends Component{
                 <div className="admin_ribbon">
                     <span className='admin_ribbon_text'>Orders</span>
                 </div>
-                { orders.length < 0 ? <div>
-                    { this.state.orders.map( (e) => {
+                { this.props.orders.length > 0 ? <div>
+                    { this.props.orders.map( (e) => {
                         return(
-                            <div key={e.user_id}>
+                            <div key={e.user_id} className="orders_display_parent">
                                 <div className="orders_display_container">
-                                <span className="">{e.firstname}</span>
-                                <span className=""
-                                >{e.lastname}</span>
+                                    <Link to={`/order/${e.user_id}`}><div>
+                                        <span className="orders_name_text">{e.firstname}</span>
+                                        <span className="orders_name_text">{e.lastname}</span>
+                                    </div></Link> 
+                                    <div>
+                                        <span className='orders_date_text'>{e.order_date}</span>
+                                    </div> 
                                 </div> 
                             </div> 
                         )
@@ -44,4 +48,9 @@ class Orders extends Component{
         )
     }
 }
-export default Orders;
+function mapStateToProps(state){
+    return {
+        orders: state.orders
+    }
+}
+export default connect(mapStateToProps, {getOrders})(Orders);

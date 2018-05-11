@@ -1,0 +1,35 @@
+.orders_display_parent {
+    height: 100%;
+    width: 100%;
+    display: flex; 
+    flex-direction: column;
+
+}
+.orders_display_container {
+    height: 50px;
+    width: 95%;
+    -webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+        margin: 6px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+}
+.orders_date_text {
+    font-size: 10px;
+}
+.fulfilled_button {
+    height: 60px;
+    width: 200px;
+    background-color: blue;
+    margin: 20px;
+    color: white;
+    font-size: 25px;
+    font-weight: 400;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 41px -1px rgba(15,32,120,1);
+-moz-box-shadow: 0px 0px 41px -1px rgba(15,32,120,1);
+box-shadow: 0px 0px 41px -1px rgba(15,32,120,1);
+}

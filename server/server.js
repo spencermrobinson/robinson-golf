@@ -112,6 +112,8 @@ passport.use( new Auth0Strategy({
     app.post('/api/addToOrders/:product_id/:product_quantity', ctrl.addToOrders);
     app.put('/api/paidTrue', ctrl.paidTrue);
     app.get('/api/getOrders', ctrl.getOrders);
+    app.get('/api/getSpecificOrder/:id', ctrl.getSpecifOrder);
+    app.post('/api/addToSales', ctrl.addToSales);
 
     app.post('/api/payment', function(req, res, next){
         const amountArray = req.body.amount.toString().split('');

@@ -5,7 +5,8 @@ const initialState = {
     admins: null,
     cart: [],
     total: null,
-    orders: null,
+    orders: [],
+    order: [],
     products: {
         product_type: null,
         product_class: null,
@@ -23,7 +24,7 @@ const initialState = {
         gender: null,
         image: null
     },
-}
+};
 
 const CHECK_LOGIN = 'CHECK_LOGIN';
 const LOGOUT = 'LOGOUT';
@@ -38,6 +39,9 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 const GET_ORDERS = 'GET_ORDERS';
+const GET_SPECIFIC_ORDER = 'GET_SPECIFIC_ORDER';
+const PRODUCT_FULFILLED = 'PRODUCT_FULFILLED';
+
 
 
 export default ( state = initialState, action) => {
@@ -54,6 +58,15 @@ export default ( state = initialState, action) => {
             for( var l = 0; newState.cart.length > l; l++){
                 if(newState.cart[l].product_id === payload.product_id){
                 newState.cart[l].product_quantity = payload.product_quantity
+                }
+            }
+            return newState
+        }
+        case PRODUCT_FULFILLED: {
+            let newState = Object.assign({}, state );
+            for( var o = 0; newState.order.length > o; o++ ){
+                if(newState.order[o].id === payload.id){
+                    newState.order[o].fulfilled = payload.fulfilled
                 }
             }
             return newState
@@ -105,7 +118,9 @@ export default ( state = initialState, action) => {
         case GET_ORDERS + '_FULFILLED': 
         return Object.assign({}, state, {orders: payload});
 
-
+        case GET_SPECIFIC_ORDER + '_FULFILLED':
+        return Object.assign({}, state, {order: payload});
+        
         case UPDATE_TOTAL: {
             return Object.assign( {}, state, {total: payload})};
         
@@ -115,11 +130,25 @@ export default ( state = initialState, action) => {
     }
 };
 
-// export function getOrders(){
-//     const promise = axios.get('/api/getOrders').then( response => {
+export function getSpecificOrder(id){
+    const promise = axios.get(`/api/getSpecificOrder/${id}`).then( response =>
+    response.data
+    )
+    return {
+        type: GET_SPECIFIC_ORDER,
+        payload: promise
+    }
+}
 
-//     })
-// }
+export function getOrders(){
+    const promise = axios.get('/api/getOrders').then( response => 
+        response.data
+    )
+    return {
+        type: GET_ORDERS,
+        payload: promise
+    }
+}
 
 export function updateTotal(num){
     return{
@@ -136,6 +165,13 @@ export function updateCartQuantity(quantity ,product_id){
     return {
         type: UPDATE_CART_QUANTITY,
         payload: promise
+    }
+}
+
+export function productFulfilled(obj){
+    return {
+        type: PRODUCT_FULFILLED,
+        payload: obj
     }
 }
 

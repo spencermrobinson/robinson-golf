@@ -8,6 +8,7 @@ import Inventory from './components/Inventory/Inventory.js';
 import Step2 from './components/Inventory/Step2';
 import Step3 from './components/Inventory/Step3';
 import Orders from './components/Orders/Orders.js';
+import Order from './components/Orders/Order.js';
 import Products from './components/Products/Products.js';
 import Product from './components/Product/Product.js';
 import Cart from './components/Cart/Cart.js';
@@ -22,12 +23,14 @@ export default function Routes(){
             <Route path='/add_admin' component={ Add_Admin }/>
             <Route path='/inventory' component={ Inventory }/>
             <Route exact path='/step2' component={ Step2 }/>
-            <Route path='/step3' component={ Step3 } />
+            <Route exact path='/step3' component={ Step3 } />
             <Route path='/orders' component={ Orders }/>
             <Route path='/products/:destination' component={ Products}/>
             <Route path='/product/:id' component={ Product } />
             <Route path='/cart/:id' component={ Cart }/>
             <Route path='/checkout' component={ CheckOut} />
+            <Route path='/order/:id' component={ Order} />
+
             
         </Switch>
     )

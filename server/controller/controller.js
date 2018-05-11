@@ -122,8 +122,10 @@ module.exports = {
     },
 
     addToOrders: (req, res) => {
+        const d = new Date();
+        const date = d.toString();
         const db = req.app.get('db');
-        db.orders.addCartToOrders([1, req.params.product_id, req.params.product_quantity]).then(response => {
+        db.orders.addCartToOrders([1, req.params.product_id, req.params.product_quantity, date]).then(response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)))
     },
@@ -137,6 +139,18 @@ module.exports = {
     getOrders: (req, res) => {
         const db = req.app.get('db');
         db.orders.getOrders().then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
+    getSpecifOrder: (req, res) => {
+        const db = req.app.get('db');
+        db.orders.getSpecificOrder([req.params.id]).then(response => {
+            res.status(200).send(response)
+        }).catch((err) => res.status(500).send(console.log(err)));
+    },
+    addToSales: (req, res) => {
+        const db = req.app.get('db'); 
+        db.sales.add_to_sales([ req.body.user_id, req.body.product_id, req.body.product_quantity, req.body.sale_date, req.body.id]).then(response => {
             res.status(200).send(response)
         }).catch((err) => res.status(500).send(console.log(err)));
     },

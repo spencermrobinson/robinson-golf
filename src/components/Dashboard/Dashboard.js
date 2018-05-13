@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import greenclubs from './dashboard_assets/drop_clubs.png';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import "./Dashboard.css";
 
 
@@ -10,9 +11,11 @@ class Dashboard extends Component{
         super();
         this.state = {
             dropdown: false,
-            destination: null
+            destination: null,
+            temperature: null
         }
         this.dropDown = this.dropDown.bind(this);
+        this.checkWeather = this.checkWeather.bind(this);
         
     }
 
@@ -27,11 +30,17 @@ class Dashboard extends Component{
             })
         }
     }
-    
+    checkWeather(){
+        axios.get('http://api.openweathermap.org/data/2.5/weather?id=5780026&units=imperial&APPID=0e272227d036b559c795d4cd3073ad11').then( response => {    
+        this.setState({
+                temperature: response.data.main.temp
+            })
+        })
+    }
 
 
     render(){
-        console.log('destination:', this.state);
+        console.log('temperature', this.state.temperature);
         return(
             <div>
                 <div>
@@ -50,7 +59,8 @@ class Dashboard extends Component{
                             <Link to='/products/Accessories' className='dash_menu' ><div>Accessories</div></Link>
                             <Link to='/products/Sale' className='dash_menu' ><div>Sale</div></Link>
                         </div> : <div></div> }
-                </div> 
+                </div>
+                <div><button type='button' className='weather_button' onClick={() => this.checkWeather()}>Current Temp</button></div>  
             </div> 
         )
     }

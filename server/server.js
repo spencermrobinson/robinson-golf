@@ -130,6 +130,7 @@ passport.use( new Auth0Strategy({
     app.post('/api/addToSales', ctrl.addToSales);
     app.get('/api/getClient/:id', ctrl.getClient);
     app.get('/api/salesByBrand', ctrl.salesByBrand);
+   
 
     app.post('/api/sendMessage', (req, res) => {
         

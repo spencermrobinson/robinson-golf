@@ -11,12 +11,12 @@ class Sales extends Component {
         super();
         this.state = {
             data: {
-                labels: null,
+                labels: ["Nike", "Titleist", "Taylormade"],
                 datasets: [{
                 label: "Sales",
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [],
+                data: [4523, 6341, 8930],
                 }]
             },
         }
@@ -48,7 +48,7 @@ class Sales extends Component {
         return(
             <div>
             <div><Header/></div>
-            <button type='button' className='sales'>sales</button>
+            
             <Bar data={this.state.data}/>
             </div> 
         )

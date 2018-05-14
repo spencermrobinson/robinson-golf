@@ -17,6 +17,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     align-content: flex-start;
+   
 }
 .dash_menu{
     height: 20px;
@@ -24,4 +25,26 @@
     background-color:#27AE60;
     color: white;
     margin-top: 1px;
+}
+.weather_container{
+    height: 200px;
+    width: 80%;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 4px;
+    -webkit-box-shadow: -4px 4px 23px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: -4px 4px 23px 1px rgba(0,0,0,0.75);
+box-shadow: -4px 4px 23px 1px rgba(0,0,0,0.75);
+}
+.weather_parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    
 }

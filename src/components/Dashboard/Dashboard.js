@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import greenclubs from './dashboard_assets/drop_clubs.png';
+import clouds from './dashboard_assets/clouds.png';
+import partly_sunny from './dashboard_assets/partly_sunny.png'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "./Dashboard.css";
@@ -12,11 +14,21 @@ class Dashboard extends Component{
         this.state = {
             dropdown: false,
             destination: null,
-            temperature: null
+            temperature: null 
+           
         }
         this.dropDown = this.dropDown.bind(this);
-        this.checkWeather = this.checkWeather.bind(this);
         
+        
+    }
+
+   componentDidMount(){
+        axios.get('http://api.openweathermap.org/data/2.5/weather?id=5780026&units=imperial&APPID=0e272227d036b559c795d4cd3073ad11').then( response => {    
+        this.setState({
+                temperature: response.data.main.temp
+            })
+        });
+         
     }
 
     dropDown(){
@@ -30,22 +42,18 @@ class Dashboard extends Component{
             })
         }
     }
-    checkWeather(){
-        axios.get('http://api.openweathermap.org/data/2.5/weather?id=5780026&units=imperial&APPID=0e272227d036b559c795d4cd3073ad11').then( response => {    
-        this.setState({
-                temperature: response.data.main.temp
-            })
-        })
-    }
+    
 
 
     render(){
         console.log('temperature', this.state.temperature);
+        
         return(
             <div>
                 <div>
                     <Header/>
-                </div> 
+                </div>
+ 
                 <div className="drop_down_container">
                     <img src={greenclubs} alt="" className="greenclubs" onClick={ () => this.dropDown()}/>
                     { this.state.dropdown === true ? 
@@ -60,7 +68,9 @@ class Dashboard extends Component{
                             <Link to='/products/Sale' className='dash_menu' ><div>Sale</div></Link>
                         </div> : <div></div> }
                 </div>
-                <div><button type='button' className='weather_button' onClick={() => this.checkWeather()}>Current Temp</button></div>  
+                <div className="weather_parent">
+                <div className="weather_container"><span className='temperature'
+                >Current Temp:   {Math.floor(this.state.temperature)}°</span><img src={partly_sunny} alt='' className="clouds_img"/></div></div>
             </div> 
         )
     }

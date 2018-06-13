@@ -23,7 +23,7 @@ class Dashboard extends Component{
     }
 
    componentDidMount(){
-        axios.get('http://api.openweathermap.org/data/2.5/weather?id=5780026&units=imperial&APPID=0e272227d036b559c795d4cd3073ad11').then( response => {    
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?id=5780026&units=imperial&APPID=${process.env.WEATHER_KEY}`).then( response => {    
         this.setState({
                 temperature: response.data.main.temp
             })

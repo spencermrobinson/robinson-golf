@@ -6,6 +6,7 @@ import partly_sunny from './dashboard_assets/partly_sunny.png'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "./Dashboard.css";
+import Carousel from './Carousel/Carousel';
 
 
 class Dashboard extends Component{
@@ -43,7 +44,9 @@ class Dashboard extends Component{
         }
     }
     
-
+//     <div className="weather_parent">
+//     <div className="weather_container"><span className='temperature'
+// >Current Temp:   {Math.floor(this.state.temperature)}°</span><img src={partly_sunny} alt='' className="clouds_img"/></div></div>
 
     render(){
         console.log('temperature', this.state.temperature);
@@ -66,11 +69,10 @@ class Dashboard extends Component{
                             <Link to='/products/Apparel' className='dash_menu' ><div>Apparel</div></Link>
                             <Link to='/products/Accessories' className='dash_menu' ><div>Accessories</div></Link>
                             <Link to='/products/Sale' className='dash_menu' ><div>Sale</div></Link>
-                        </div> : <div></div> }
+                        </div> : <div></div>   }
                 </div>
-                <div className="weather_parent">
-                <div className="weather_container"><span className='temperature'
-                >Current Temp:   {Math.floor(this.state.temperature)}°</span><img src={partly_sunny} alt='' className="clouds_img"/></div></div>
+                {/* <Carousel/> */}
+                
             </div> 
         )
     }

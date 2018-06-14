@@ -12,6 +12,11 @@
     
 
 }
+@media (max-width: 600px){
+    .header_container{
+        margin-bottom: 5%;
+    }
+}
 .header_golf_cart{
     height: 60px;
     width: 60px;
